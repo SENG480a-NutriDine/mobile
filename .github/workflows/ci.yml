@@ -26,6 +26,7 @@ jobs:
     
     - name: 🚀 Create update
       run: eas update --auto --non-interactive
+      working-directory: ./app
       
     # - name: Run tests
     #   run: npm test
