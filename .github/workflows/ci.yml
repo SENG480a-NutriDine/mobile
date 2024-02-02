@@ -1,4 +1,4 @@
-name: Simple CI for Expo App
+name: Expo CI Workflow
 
 on:
   push:
@@ -6,14 +6,19 @@ on:
       - '**'
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    
     - uses: actions/setup-node@v2
       with:
         node-version: '21.6' 
-    - name: Install Dependencies
+
+    - name: Install dependencies
       run: npm install
-    # - name: Run Tests
-    #   run: npm test 
+      working-directory: ./app
+      
+    # - name: Run tests
+    #   run: npm test
+    #   working-directory: ./app
