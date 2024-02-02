@@ -30,6 +30,15 @@ jobs:
       run: npm install
       working-directory: ./app
     
+    - name: EAS install
+      run: npm install --global eas-cli
+      working-directory: ./app
+
+    - name: EAS init
+      run: eas init --id 9e90ddc1-6274-43ed-97fd-be2efb96d160
+      working-directory: ./app
+      
+    
     - name: 🚀 Create update
       run: eas update --auto --non-interactive
       working-directory: ./app
