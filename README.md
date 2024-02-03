@@ -21,3 +21,8 @@ To see the app running, you need to setup an emulator or simulator. Below are my
 
 Once you figured out the simulator/emulator, you will see the app renders a button. Clicking this button will write a new document to the DB (and on refresh log it to the app).
 When you have firebase console access, go check that the data is in fact being written to the DB. That's it!
+
+
+
+Definely works on IOS, small change occured in package.json "expo": "~50.0.4", ->  "expo": "^50.0.4",
+Looks like syntax for differnt os.  If this breaks things for you and you are on windows, might be this 
