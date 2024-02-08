@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "restaurantId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        }
+      },
+      "required": ["latitude", "longitude"]
+    },
+    "address": {
+      "type": "string"
+    },
+    "rating_counts": {
+      "type": "object",
+      "properties": {
+        "1": {
+          "type": "integer"
+        },
+        "2": {
+          "type": "integer"
+        },
+        "3": {
+          "type": "integer"
+        },
+        "4": {
+          "type": "integer"
+        },
+        "5": {
+          "type": "integer"
+        }
+      },
+      "required": ["1", "2", "3", "4", "5"]
+    },
+    "average_rating": {
+      "type": "number"
+    },
+    "menus": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "restaurantId",
+    "name",
+    "location",
+    "address",
+    "rating_counts",
+    "average_rating",
+    "menus"
+  ]
+}
