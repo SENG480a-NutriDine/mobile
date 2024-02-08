@@ -18,7 +18,6 @@ export default function EnterFoodForm() {
   };
 
   const onSubmit = () => {
-    // Handle form submission logic here
     console.log("Submitted food name:", formState.foodName);
   };
 
