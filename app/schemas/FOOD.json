@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "foodId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "nutritionalData": {
+      "type": "object",
+      "properties": {
+        "calories": {
+          "type": "integer"
+        },
+        "protein": {
+          "type": "string"
+        },
+        "carbs": {
+          "type": "string"
+        },
+        "fats": {
+          "type": "string"
+        },
+        "fiber": {
+          "type": "string"
+        }
+      },
+      "required": ["calories", "protein", "carbs", "fats", "fiber"]
+    },
+    "menuId": {
+      "type": "string"
+    }
+  },
+  "required": ["foodId", "name", "description", "nutritionalData", "menuId"]
+}
