@@ -1,14 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Button, Text, View } from "react-native";
-import { FIREBASE_DB } from "./firebaseConfig";
+import { StyleSheet, Text, View } from "react-native";
+import { FIREBASE_DB } from "../firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
-import * as SplashScreen from 'expo-splash-screen';
-
-
+import * as SplashScreen from "expo-splash-screen";
+import { router } from "expo-router";
+import { Button } from "react-native-paper";
 
 SplashScreen.preventAutoHideAsync();
-
 
 export default function App() {
   const [testState, setTestState] = useState<any[]>([]);
@@ -33,7 +32,7 @@ export default function App() {
         setTestState(documents);
 
         // Just for fun
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (error) {
         console.error("Error fetching documents:", error);
       } finally {
@@ -48,7 +47,7 @@ export default function App() {
     if (appIsReady) {
       await SplashScreen.hideAsync();
     }
-  }, [appIsReady])
+  }, [appIsReady]);
 
   if (!appIsReady) {
     return null;
@@ -56,7 +55,25 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Button onPress={testWriteToDB} title="Test to write to DB" />
+      <Button
+        style={styles.button}
+        buttonColor="#264653"
+        textColor="white"
+        mode="contained"
+        onPress={() => router.push("admin/DataSubmission")}
+      >
+        Go to Data Submission
+      </Button>
+
+      <Button
+        buttonColor="#264653"
+        textColor="white"
+        mode="contained"
+        style={styles.button}
+        onPress={testWriteToDB}
+      >
+        <Text>Test write to DB"</Text>
+      </Button>
       {testState.length > 0 &&
         testState.map(
           (doc: { id: react.Key | null | undefined; title: any }) => (
@@ -76,5 +93,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    margin: 10,
+    borderRadius: 10,
+    borderWidth: 1,
   },
 });
