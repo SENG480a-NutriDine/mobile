@@ -1,17 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { Button } from "react-native-paper";
+import { Text, View } from "react-native";
 import { FIREBASE_DB } from "../firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { router } from "expo-router";
-import { Button } from "react-native-paper";
+import { globalStyles } from "../constants/styles/global";
+import { themeCustomHook } from "../custom/ThemeCustomHook";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [testState, setTestState] = useState<any[]>([]);
   const [appIsReady, setAppIsReady] = useState<Boolean>(false);
+
+  const { themeTextStyle, themeContainerStyle } = themeCustomHook();
 
   async function testWriteToDB() {
     const newDoc = await addDoc(collection(FIREBASE_DB, "testCollection"), {
@@ -54,11 +58,14 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View
+      style={[globalStyles.container, themeContainerStyle]}
+      onLayout={onLayoutRootView}
+    >
       <Button
-        style={styles.button}
-        buttonColor="#264653"
-        textColor="white"
+        style={globalStyles.buttonShape}
+        buttonColor="#264653" // TODO: Update to use themeCustomHook
+        textColor="white" // TODO: Update to use themeCustomHook
         mode="contained"
         onPress={() => router.push("admin/DataSubmission")}
       >
@@ -66,19 +73,21 @@ export default function App() {
       </Button>
 
       <Button
-        buttonColor="#264653"
-        textColor="white"
+        style={globalStyles.buttonShape}
+        buttonColor="#264653" // TODO: Update to use themeCustomHook
+        textColor="white" // TODO: Update to use themeCustomHook
         mode="contained"
-        style={styles.button}
         onPress={testWriteToDB}
       >
-        <Text>Test write to DB"</Text>
+        <Text>Test write to DB</Text>
       </Button>
       {testState.length > 0 &&
         testState.map(
           (doc: { id: react.Key | null | undefined; title: any }) => (
             <View key={doc.id}>
-              <Text>{`Title: ${doc.title}`}</Text>
+              <Text
+                style={[globalStyles.text, themeTextStyle]}
+              >{`Title: ${doc.title}`}</Text>
             </View>
           )
         )}
@@ -86,17 +95,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    margin: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-  },
-});

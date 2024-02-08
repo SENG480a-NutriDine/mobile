@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, TextInput, Text } from "react-native";
 import { Button } from "react-native-paper";
-import { StyleSheet } from "react-native";
 import { Controller, useForm } from "react-hook-form";
+import { globalStyles } from "../constants/styles/global";
 
 export default function EnterFoodForm() {
   // TODO: Update based on data modelling once completed
@@ -23,12 +23,12 @@ export default function EnterFoodForm() {
 
   return (
     <View>
-      <Text style={styles.formLabel}>Food Name</Text>
+      <Text style={globalStyles.formLabel}>Food Name</Text>
       <Controller
         control={control}
         render={({ field }) => (
           <TextInput
-            style={styles.textInput}
+            style={globalStyles.buttonShape}
             placeholder="Enter food name"
             value={formState.foodName}
             onChangeText={(text) => {
@@ -47,40 +47,20 @@ export default function EnterFoodForm() {
         }}
       />
       {errors.foodName && (
-        <Text style={styles.errorText}>{String(errors.foodName.message)}</Text>
+        <Text style={globalStyles.errorText}>
+          {String(errors.foodName.message)}
+        </Text>
       )}
 
       <Button
-        buttonColor="#264653"
-        textColor="white"
+        buttonColor="#264653" // TODO: Update to use themeCustomHook
+        textColor="white" // TODO: Update to use themeCustomHook
         mode="contained"
-        style={styles.submitButton}
+        style={globalStyles.buttonShape}
         onPress={handleSubmit(onSubmit)}
       >
         Submit
       </Button>
     </View>
   );
-  {
-  }
 }
-
-const styles = StyleSheet.create({
-  formLabel: {
-    fontWeight: "bold",
-  },
-  textInput: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "black",
-    padding: 10,
-  },
-  submitButton: {
-    borderRadius: 10,
-    borderWidth: 1,
-  },
-  errorText: {
-    color: "red",
-  },
-});
