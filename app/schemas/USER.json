@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "userId": {
+        "type": "string"
+      },
+      "f_name": {
+        "type": "string"
+      },
+      "l_name": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string"
+      },
+      "phone_number": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "favorites": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "referral_code": {
+        "type": "string"
+      },
+      "referrals": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "userId",
+      "f_name",
+      "l_name",
+      "email",
+      "phone_number",
+      "location",
+      "favorites",
+      "referral_code",
+      "referrals"
+    ]
+  }
