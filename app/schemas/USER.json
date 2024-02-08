@@ -18,6 +18,21 @@
         "type": "string"
       },
       "location": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude"
+        ]
+      },
+      "address": {
         "type": "string"
       },
       "favorites": {
@@ -45,6 +60,7 @@
       "email",
       "phone_number",
       "location",
+      "address",
       "favorites",
       "referral_code",
       "referrals"
