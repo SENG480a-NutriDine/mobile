@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync();
 
 
 export default function App() {
-  const styles = getStyles();
+  const {theme,styles} = getStyles();
 
   
   const [testState, setTestState] = useState<any[]>([]);
