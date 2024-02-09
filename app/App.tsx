@@ -4,18 +4,20 @@ import { FIREBASE_DB } from "./firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from 'expo-splash-screen';
-import { globalStyles } from "./constants/styles/global";
-import { themeCustomHook } from './custom/ThemeCustomHook'
+import { getStyles } from "./constants/styles/global";
 
 
 SplashScreen.preventAutoHideAsync();
 
 
 export default function App() {
+  const {theme,styles} = getStyles();
+
+  
   const [testState, setTestState] = useState<any[]>([]);
   const [appIsReady, setAppIsReady] = useState<Boolean>(false);
 
-  const { themeTextStyle, themeContainerStyle } = themeCustomHook();
+  
 
   async function testWriteToDB() {
     const newDoc = await addDoc(collection(FIREBASE_DB, "testCollection"), {
@@ -58,13 +60,13 @@ export default function App() {
   }
 
   return (
-    <View style={[globalStyles.container, themeContainerStyle]} onLayout={onLayoutRootView}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <Button onPress={testWriteToDB} title="Test to write to DB" />
       {testState.length > 0 &&
         testState.map(
           (doc: { id: react.Key | null | undefined; title: any }) => (
             <View key={doc.id}>
-              <Text style={[globalStyles.text, themeTextStyle]}>{`Title: ${doc.title}`}</Text>
+              <Text style={styles.text}>{`Title: ${doc.title}`}</Text>
             </View>
           )
         )}
