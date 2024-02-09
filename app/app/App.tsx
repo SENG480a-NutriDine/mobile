@@ -60,8 +60,8 @@ export default function App() {
     <View style={styles.container} onLayout={onLayoutRootView}>
       <Button
         style={styles.buttonShape}
-        buttonColor={colors[theme].primary} // Use the keyof operator to ensure a valid key is used
-        textColor={colors[theme].text} // TODO: Update to use themeCustomHook
+        buttonColor={colors[theme].button.background}
+        textColor={colors[theme].button.text}
         mode="contained"
         onPress={() => router.push("admin/DataSubmission")}
       >
@@ -69,8 +69,8 @@ export default function App() {
       </Button>
       <Button
         style={styles.buttonShape}
-        buttonColor="#264653" // TODO: Update to use themeCustomHook
-        textColor="white" // TODO: Update to use themeCustomHook
+        buttonColor={colors[theme].button.background}
+        textColor={colors[theme].button.text}
         mode="contained"
         onPress={testWriteToDB}
       >

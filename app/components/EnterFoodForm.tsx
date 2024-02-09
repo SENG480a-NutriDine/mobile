@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, TextInput, Text } from "react-native";
 import { Button } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
-import { getStyles } from "../constants/styles/global";
+import { colors, getStyles } from "../constants/styles/global";
 
 export default function EnterFoodForm() {
   const { theme, styles } = getStyles();
@@ -30,7 +30,8 @@ export default function EnterFoodForm() {
         control={control}
         render={({ field }) => (
           <TextInput
-            style={styles.buttonShape}
+            style={styles.textInput}
+            placeholderTextColor={colors[theme].placeholderText}
             placeholder="Enter food name"
             value={formState.foodName}
             onChangeText={(text) => {
@@ -44,7 +45,7 @@ export default function EnterFoodForm() {
           required: "Please enter a food name",
           minLength: {
             value: 1,
-            message: "Food name must have a length of at least 1",
+            message: "Food name must have a length of at least 1.",
           },
         }}
       />
@@ -53,8 +54,8 @@ export default function EnterFoodForm() {
       )}
 
       <Button
-        buttonColor="#264653" // TODO: Update to use themeCustomHook
-        textColor="white" // TODO: Update to use themeCustomHook
+        buttonColor={colors[theme].button.background}
+        textColor={colors[theme].button.text}
         mode="contained"
         style={styles.buttonShape}
         onPress={handleSubmit(onSubmit)}
