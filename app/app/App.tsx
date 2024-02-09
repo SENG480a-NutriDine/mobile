@@ -6,16 +6,15 @@ import { FIREBASE_DB } from "../firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { globalStyles } from "../constants/styles/global";
-import { themeCustomHook } from "../custom/ThemeCustomHook";
+import { getStyles, colors } from "../constants/styles/global";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const { theme, styles } = getStyles();
+
   const [testState, setTestState] = useState<any[]>([]);
   const [appIsReady, setAppIsReady] = useState<Boolean>(false);
-
-  const { themeTextStyle, themeContainerStyle } = themeCustomHook();
 
   async function testWriteToDB() {
     const newDoc = await addDoc(collection(FIREBASE_DB, "testCollection"), {
@@ -58,22 +57,18 @@ export default function App() {
   }
 
   return (
-    <View
-      style={[globalStyles.container, themeContainerStyle]}
-      onLayout={onLayoutRootView}
-    >
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <Button
-        style={globalStyles.buttonShape}
-        buttonColor="#264653" // TODO: Update to use themeCustomHook
-        textColor="white" // TODO: Update to use themeCustomHook
+        style={styles.buttonShape}
+        buttonColor={colors[theme].primary} // Use the keyof operator to ensure a valid key is used
+        textColor={colors[theme].text} // TODO: Update to use themeCustomHook
         mode="contained"
         onPress={() => router.push("admin/DataSubmission")}
       >
         Go to Data Submission
       </Button>
-
       <Button
-        style={globalStyles.buttonShape}
+        style={styles.buttonShape}
         buttonColor="#264653" // TODO: Update to use themeCustomHook
         textColor="white" // TODO: Update to use themeCustomHook
         mode="contained"
@@ -85,9 +80,7 @@ export default function App() {
         testState.map(
           (doc: { id: react.Key | null | undefined; title: any }) => (
             <View key={doc.id}>
-              <Text
-                style={[globalStyles.text, themeTextStyle]}
-              >{`Title: ${doc.title}`}</Text>
+              <Text style={styles.text}>{`Title: ${doc.title}`}</Text>
             </View>
           )
         )}
