@@ -1,23 +1,20 @@
 import { StatusBar } from "expo-status-bar";
-import { Button, Text, View } from "react-native";
-import { FIREBASE_DB } from "./firebaseConfig";
+import { router } from "expo-router";
+import { Button } from "react-native-paper";
+import { Text, View } from "react-native";
+import { FIREBASE_DB } from "../../firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
-import * as SplashScreen from 'expo-splash-screen';
-import { getStyles } from "./constants/styles/global";
-
+import * as SplashScreen from "expo-splash-screen";
+import { getStyles, colors } from "../../constants/styles/global";
 
 SplashScreen.preventAutoHideAsync();
 
-
 export default function App() {
-  const {theme,styles} = getStyles();
+  const { theme, styles } = getStyles();
 
-  
   const [testState, setTestState] = useState<any[]>([]);
   const [appIsReady, setAppIsReady] = useState<Boolean>(false);
-
-  
 
   async function testWriteToDB() {
     const newDoc = await addDoc(collection(FIREBASE_DB, "testCollection"), {
@@ -38,7 +35,7 @@ export default function App() {
         setTestState(documents);
 
         // Just for fun
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (error) {
         console.error("Error fetching documents:", error);
       } finally {
@@ -53,7 +50,7 @@ export default function App() {
     if (appIsReady) {
       await SplashScreen.hideAsync();
     }
-  }, [appIsReady])
+  }, [appIsReady]);
 
   if (!appIsReady) {
     return null;
@@ -61,7 +58,15 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Button onPress={testWriteToDB} title="Test to write to DB" />
+      <Button
+        style={styles.buttonShape}
+        buttonColor={colors[theme].button.background}
+        textColor={colors[theme].button.text}
+        mode="contained"
+        onPress={testWriteToDB}
+      >
+        <Text>Test write to DB</Text>
+      </Button>
       {testState.length > 0 &&
         testState.map(
           (doc: { id: react.Key | null | undefined; title: any }) => (
