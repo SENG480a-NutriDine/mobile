@@ -1,5 +1,5 @@
-import App from "./App";
+import { Redirect } from "expo-router";
 
 export default function Index() {
-  return <App />;
+  return <Redirect href="/App" />;
 }
