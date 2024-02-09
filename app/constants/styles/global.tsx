@@ -14,6 +14,10 @@ type Colors = {
       background: string;
       text: string;
     };
+    icon: {
+      selected: string;
+      option: string;
+    };
   };
   dark: {
     primary: string;
@@ -27,6 +31,10 @@ type Colors = {
     button: {
       background: string;
       text: string;
+    };
+    icon: {
+      selected: string;
+      option: string;
     };
   };
 };
@@ -45,6 +53,10 @@ export const colors: Colors = {
       background: "#264653",
       text: "white",
     },
+    icon: {
+      selected: "#8A837D",
+      option: "#C9C1B9",
+    },
   },
   dark: {
     primary: "#121212",
@@ -58,6 +70,10 @@ export const colors: Colors = {
     button: {
       background: "#37A395",
       text: "white",
+    },
+    icon: {
+      selected: "#D6CEC7",
+      option: "#8A837D",
     },
   },
 };
