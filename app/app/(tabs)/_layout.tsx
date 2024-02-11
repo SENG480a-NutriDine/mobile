@@ -14,9 +14,10 @@ export default () => {
         tabBarStyle: {
           height: 90,
           backgroundColor: colors[theme].primary,
-          opacity: 0.6,
-          // borderTopLeftRadius: 50,
-          // borderTopRightRadius: 50,
+          opacity: 0.97,
+          // borderTopLeftRadius: 100,
+          // borderTopRightRadius: 100,
+          position: "absolute",
           //   borderColor: colors[theme].secondary,
         },
         tabBarLabelStyle: {

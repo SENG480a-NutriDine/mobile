@@ -38,7 +38,8 @@ const HomePage = () => {
 
     return (
         <SafeAreaView
-            style={[styles.safeArea, { backgroundColor: colors[theme].primary }]}>
+            style={[styles.safeArea, { backgroundColor: colors[theme].primary }]}
+        >
             <View style={styles.root}>
                 <View style={styles.searchBarCont}>
                     <SearchBar />
@@ -48,8 +49,10 @@ const HomePage = () => {
                     {sampleRestaurants.map((rest, index) => (
                         <FoodSection key={index.toString()} restaurantName={rest.name} foodItems={rest.items} />
                     ))}
+                    <View style={{ opacity: 0, height: 150 }} />
                 </ScrollView>
             </View>
+
         </SafeAreaView>
     );
 }
@@ -57,17 +60,20 @@ const HomePage = () => {
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
+        backgroundColor: 'transparent',
     },
     root: {
         paddingTop: 30,
         paddingLeft: 30,
-
+        // flex: 1,
     },
     searchBarCont: {
         paddingRight: 30,
+        paddingBottom: 10,
     },
     scrollViewStyle: {
-        paddingTop: 20,
+        // paddingTop: 10,
+        paddingBottom: 90,
     }
 });
 
