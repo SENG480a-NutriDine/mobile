@@ -7,6 +7,7 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { getStyles, colors } from "../../constants/styles/global";
+import { AuthService } from "../../services/AuthService/AuthService";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -58,6 +59,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
+      <AuthService></AuthService>
       <Button
         style={styles.buttonShape}
         buttonColor={colors[theme].button.background}

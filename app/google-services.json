@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "188208814441",
+    "project_id": "nutridine",
+    "storage_bucket": "nutridine.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188208814441:android:42f1da524aeda428ad05f8",
+        "android_client_info": {
+          "package_name": "com.anonymous.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188208814441-3l3lf7jor29fle2vcgse83ck3jgpnijj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.mobile",
+            "certificate_hash": "77c79611facd30568de66f01af0bd0ddd01b2033"
+          }
+        },
+        {
+          "client_id": "188208814441-o6lot80rpvs7a9rotedtoq6pdb713tk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.mobile",
+            "certificate_hash": "e5d69e936252e51b434547bdf301944752a44073"
+          }
+        },
+        {
+          "client_id": "188208814441-8u30auacid9g4d5pfjufaotqrgp53q1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuiY_VskctnWzhIuMxTCHMqFBltP_ho-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188208814441-0jrj9hglgnejclmm36ga9uo06fn0ubvt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "188208814441-e23rsv888tfuotevo7v5honp18ketqrm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anonymous.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
