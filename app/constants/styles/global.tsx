@@ -118,6 +118,14 @@ export const getStyles = () => {
       errorText: {
         color: colors[theme].error,
       },
+      dropdown: {
+        backgroundColor: colors[theme].secondary,
+        color: colors[theme].text,
+        minHeight: 40,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: colors[theme].primary,
+      },
     }),
   };
 };
