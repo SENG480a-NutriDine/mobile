@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { colors, getStyles } from "../constants/styles/global";
 
 // Will Change based off data model
 interface FoodItem {
-    id: string; // Unique identifier for each food item
+    id: number; // Unique identifier for each food item
     name: string; // Name of the food item
     description?: string; // Description of the food item (optional)
     price: number; // Price of the food item
@@ -15,14 +16,31 @@ interface FoodSectionProps {
 }
 
 const FoodSection: React.FC<FoodSectionProps> = ({ restaurantName, foodItems }) => {
+    const { theme } = getStyles();
+
     return (
         <View style={styles.root}>
-            <Text style={styles.header}>{restaurantName}</Text>
+            <Text
+                style={[styles.header, { color: colors[theme].text }]}
+            >
+                {restaurantName}
+            </Text>
             <ScrollView horizontal style={styles.items} showsHorizontalScrollIndicator={false}>
                 {foodItems.map(item => (
-                    <View key={item.id} style={styles.item}>
-                        <Text style={styles.itemHeader}>{item.name}</Text>
-                        <Text style={styles.itemDescription}>{item.description}</Text>
+                    <View
+                        key={item.id}
+                        style={[styles.item, { backgroundColor: colors[theme].secondary }]}
+                    >
+                        <Text
+                            style={[styles.itemHeader, { color: colors[theme].text }]}
+                        >
+                            {item.name}
+                        </Text>
+                        <Text
+                            style={[styles.itemDescription, { color: colors[theme].tertiary }]}
+                        >
+                            {item.description}
+                        </Text>
                     </View>
                 ))}
             </ScrollView>
@@ -32,31 +50,32 @@ const FoodSection: React.FC<FoodSectionProps> = ({ restaurantName, foodItems }) 
 
 const styles = StyleSheet.create({
     root: {
+        paddingTop: 10,
+        paddingBottom: 20,
     },
     header: {
-        // fontWeight: "bold",
         fontSize: 25,
-        marginBottom: 10,
+        marginBottom: 10, // Increased bottom margin for more space above the items
     },
     items: {
-
     },
     item: {
-        width: 150,
-        height: 120,
-        backgroundColor: "grey",
+        width: 178,
+        height: 150,
+        // backgroundColor: "white",
         borderRadius: 20,
         marginRight: 20,
-        // flexDirection: "column-reverse",
-        flexDirection: "column",
-        padding: 10,
+        padding: 15,
+        justifyContent: 'space-between',
     },
     itemHeader: {
-        fontSize: 17,
+        fontSize: 20,
     },
     itemDescription: {
-        fontSize: 12,
-    }
+        fontSize: 15,
+        color: "#666",
+    },
 });
+
 
 export default FoodSection;

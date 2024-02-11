@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Image } from 'react-native';
+import { colors, getStyles } from "../constants/styles/global";
 
 const SearchBar = () => {
+    const { theme } = getStyles();
+
     return (
-        <View style={styles.container}>
+        <View
+            style={[styles.container, { backgroundColor: colors[theme].searchBarBackground }]}
+        >
             <TextInput
                 placeholder="Search NutriDine"
-                style={styles.input}
+                style={[styles.input, { color: colors[theme].text }]}
+                placeholderTextColor={colors[theme].searchBarPlaceholderText}
             />
         </View>
     );
@@ -15,19 +21,13 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        backgroundColor: '#FFF',
         borderRadius: 20,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 2,
         alignItems: 'center',
         paddingHorizontal: 15,
     },
     input: {
         flex: 1,
-        paddingVertical: 10,
+        paddingVertical: 20,
         paddingLeft: 10,
         fontSize: 16,
     },

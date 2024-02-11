@@ -12,11 +12,11 @@ export default () => {
         tabBarActiveTintColor: colors[theme].icon.selected,
         tabBarInactiveTintColor: colors[theme].icon.option,
         tabBarStyle: {
-          height: 40,
+          height: 90,
           backgroundColor: colors[theme].primary,
-          //   borderWidth: 2,
-          //   borderTopLeftRadius: 2,
-          //   borderTopRightRadius: 2,
+          opacity: 0.6,
+          // borderTopLeftRadius: 50,
+          // borderTopRightRadius: 50,
           //   borderColor: colors[theme].secondary,
         },
         tabBarLabelStyle: {

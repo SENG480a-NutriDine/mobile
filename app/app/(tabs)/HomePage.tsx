@@ -1,9 +1,13 @@
-import { ScrollView, SafeAreaView, View, Text } from "react-native";
+import { ScrollView, SafeAreaView, View, Text, StyleSheet } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import CategorySection from "../../components/CategorySection";
 import FoodSection from "../../components/FoodSection";
+import { colors, getStyles } from "../../constants/styles/global";
+
 
 const HomePage = () => {
+
+    const { theme } = getStyles();
 
     const sampleRestaurants = [
         {
@@ -33,22 +37,38 @@ const HomePage = () => {
     ];
 
     return (
-        <SafeAreaView style={styles.root}>
-            <SearchBar />
-            <ScrollView>
-                <CategorySection />
-                {sampleRestaurants.map((rest, index) => (
-                    <FoodSection key={index.toString()} restaurantName={rest.name} foodItems={rest.items} />
-                ))}
-            </ScrollView>
+        <SafeAreaView
+            style={[styles.safeArea, { backgroundColor: colors[theme].primary }]}>
+            <View style={styles.root}>
+                <View style={styles.searchBarCont}>
+                    <SearchBar />
+                </View>
+                <ScrollView style={styles.scrollViewStyle}>
+                    <CategorySection />
+                    {sampleRestaurants.map((rest, index) => (
+                        <FoodSection key={index.toString()} restaurantName={rest.name} foodItems={rest.items} />
+                    ))}
+                </ScrollView>
+            </View>
         </SafeAreaView>
     );
 }
 
-const styles = {
-    root: {
+const styles = StyleSheet.create({
+    safeArea: {
         flex: 1,
+    },
+    root: {
+        paddingTop: 30,
+        paddingLeft: 30,
+
+    },
+    searchBarCont: {
+        paddingRight: 30,
+    },
+    scrollViewStyle: {
+        paddingTop: 20,
     }
-}
+});
 
 export default HomePage;

@@ -9,6 +9,8 @@ type Colors = {
     tint: string;
     text: string;
     placeholderText: string;
+    searchBarBackground: string;
+    searchBarPlaceholderText: string;
     error: string;
     button: {
       background: string;
@@ -27,6 +29,8 @@ type Colors = {
     tint: string;
     text: string;
     placeholderText: string;
+    searchBarBackground: string;
+    searchBarPlaceholderText: string;
     error: string;
     button: {
       background: string;
@@ -48,6 +52,8 @@ export const colors: Colors = {
     tint: "#111827",
     text: "#111827",
     placeholderText: "#9CA3AF",
+    searchBarBackground: "#F2F2F7",
+    searchBarPlaceholderText: "#8E8E93",
     error: "red",
     button: {
       background: "#264653",
@@ -66,6 +72,8 @@ export const colors: Colors = {
     tint: "#f9fafb",
     text: "#f9fafb",
     placeholderText: "#9CA3AF",
+    searchBarBackground: "#505050",
+    searchBarPlaceholderText: "A3A3A3",
     error: "#FF5555",
     button: {
       background: "#37A395",
