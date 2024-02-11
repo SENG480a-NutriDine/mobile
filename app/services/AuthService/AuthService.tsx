@@ -1,21 +1,25 @@
 import {
     GoogleSignin,
     GoogleSigninButton,
+    User,
     statusCodes,
   } from '@react-native-google-signin/google-signin';
 import { Button } from 'react-native';
+
+
 export const AuthService = () => {
 
     GoogleSignin.configure({
-        iosClientId:'188208814441-v2nphv6ree54ij5jo4b33d12lj3us8df.apps.googleusercontent.com',
-        webClientId: '188208814441-8u30auacid9g4d5pfjufaotqrgp53q1r.apps.googleusercontent.com',
+        iosClientId: process.env.EXPO_PUBLIC_IOS_CLIENT_ID,
+        webClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
     });
     
-    const signIn: () => Promise<void> = async () =>{
+    const signIn: () => Promise<User | undefined> = async () =>{
         try {
           await GoogleSignin.hasPlayServices();
           const userInfo = await GoogleSignin.signIn();
           console.log(userInfo)
+          return userInfo;
         } catch (error: any) {
           if (error.code === statusCodes.SIGN_IN_CANCELLED) {
           } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -25,10 +29,16 @@ export const AuthService = () => {
         }
     };
 
+    const isSignedIn = async () => {
+        const isSignedIn = await GoogleSignin.isSignedIn();
+        return isSignedIn;
+    };
+
     const getCurrentUser = async () => {
         const currentUser = await GoogleSignin.getCurrentUser();
         console.log(currentUser)
         console.log("HELLLLO")
+        return currentUser;
     };
 
     const signOut = async () => {
@@ -37,7 +47,7 @@ export const AuthService = () => {
         } catch (error) {
           console.error(error);
         }
-      };
+    };
     
       
     return (

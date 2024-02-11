@@ -10,13 +10,15 @@ module.exports = function (api) {
           path: ".env",
           blocklist: null,
           allowlist: null,
+          blacklist: null,
+          whitelist: null,
           safe: false,
           allowUndefined: true,
           verbose: false,
         },
       ],
     ],
-    presets: ["babel-preset-expo", "react-native-dotenv"],
+    presets: ["babel-preset-expo"],
     env: {
       production: {
         plugins: ["react-native-paper/babel", "expo-router/babel"],
