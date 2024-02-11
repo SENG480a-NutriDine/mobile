@@ -25,7 +25,7 @@ export default () => {
       }}
     >
       <Tabs.Screen
-        name="App"
+        name="HomePage"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
