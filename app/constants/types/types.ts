@@ -72,5 +72,3 @@ export interface User {
   address: string | null;
   favoriteFoodUids: string[];
 }
-
-export type FoodForm = Omit<Food, "uid" | "ratingCounts">;

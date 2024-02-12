@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RNPickerSelect, { Item } from "react-native-picker-select";
 import { View } from "react-native";
-import { colors, getStyles } from "../constants/styles/global";
-import { FoodForm } from "../constants/types/types";
+import { getStyles } from "../constants/styles/global";
+import { Food } from "../constants/types/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { handleTopLevelStringChange } from "../custom/functions/forms/formValidation";
+import { handleTopLevelStringChange } from "../custom/functions/forms/handleFormChanges";
 
 /**
  * @brief This component is purpose built for the EnterFoodForm.tsx component.
@@ -22,7 +22,7 @@ export default function FormDropdown({
   name: string;
   options: { label: string; value: string }[];
   field: ControllerRenderProps<FieldValues, "restaurantUid" | "menuUid">;
-  setFormState: React.Dispatch<React.SetStateAction<FoodForm>>;
+  setFormState: React.Dispatch<React.SetStateAction<Food>>;
 }) {
   const { styles } = getStyles();
 
@@ -31,6 +31,10 @@ export default function FormDropdown({
     value: "",
   };
   const [selectedValue, setSelectedValue] = useState<string>(placeholder.value);
+
+  useEffect(() => {
+    setSelectedValue(field.value ?? "");
+  }, [field.value]);
 
   function handleChange(value: string) {
     // for the dropdown component

@@ -1,6 +1,7 @@
-import { FoodForm } from "../types/types";
+import { Food } from "../types/types";
 
-export const initializeFoodForm: FoodForm = {
+export const initializeFoodForm: Readonly<Food> = {
+  uid: "",
   name: "",
   description: "",
   nutritionalData: {
@@ -31,6 +32,13 @@ export const initializeFoodForm: FoodForm = {
   },
   menuUid: "",
   restaurantUid: "",
-  submittedByUserUid: "", // TODO: get from auth
+  submittedByUserUid: "",
   purchaseAt: [],
+  ratingCounts: {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  },
 };

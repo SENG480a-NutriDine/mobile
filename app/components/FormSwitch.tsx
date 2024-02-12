@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch } from "react-native-paper";
-import { FoodForm } from "../constants/types/types";
+import { Food } from "../constants/types/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { handleNutritionalDataChange } from "../custom/functions/forms/formValidation";
+import { handleNutritionalDataChange } from "../custom/functions/forms/handleFormChanges";
 import { colors, getStyles } from "../constants/styles/global";
 
 export default function FormSwitch({
+  startSwitchAsOn,
   name,
   field,
   setFormState,
   trigger,
 }: {
-  name: keyof FoodForm["nutritionalData"];
+  startSwitchAsOn: boolean;
+  name: keyof Food["nutritionalData"];
   field: ControllerRenderProps<
     FieldValues,
     | "isEstimate"
@@ -22,11 +24,15 @@ export default function FormSwitch({
     | "hasFreshFruits"
     | "hasFreshVegetables"
   >;
-  setFormState: React.Dispatch<React.SetStateAction<FoodForm>>;
+  setFormState: React.Dispatch<React.SetStateAction<Food>>;
   trigger?: (name?: string | string[]) => Promise<boolean>;
 }) {
-  const [switchIsOn, setSwitchIsOn] = useState(false);
-  const { theme, styles } = getStyles();
+  const [switchIsOn, setSwitchIsOn] = useState(startSwitchAsOn);
+  const { theme } = getStyles();
+
+  useEffect(() => {
+    setSwitchIsOn(startSwitchAsOn);
+  }, [startSwitchAsOn]);
 
   function handleChange(value: boolean) {
     // for the switch component

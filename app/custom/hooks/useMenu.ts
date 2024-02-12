@@ -14,6 +14,7 @@ const useMenu = (restaurantUid: string) => {
 
   useEffect(() => {
     const fetchExercises = async () => {
+      console.log("useMenu() is fetching...");
       try {
         const db = getFirestore();
         const menusCollection = collection(db, "menus");

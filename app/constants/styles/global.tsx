@@ -143,6 +143,17 @@ export const getStyles = () => {
         borderWidth: 1,
         borderColor: colors[theme].primary,
       },
+      modal: {
+        backgroundColor: colors[theme].secondary,
+        color: colors[theme].text,
+        width: "100%",
+        height: "100%",
+        borderRadius: 20,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        alignItems: "center",
+      },
     }),
   };
 };

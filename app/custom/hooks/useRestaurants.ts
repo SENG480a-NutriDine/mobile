@@ -15,6 +15,7 @@ const useRestaurants = () => {
 
   useEffect(() => {
     const fetchExercises = async () => {
+      console.log("useRestaurant() is fetching...");
       try {
         const db = getFirestore();
         const restaurantsCollection = collection(db, "restaurants");
@@ -35,7 +36,7 @@ const useRestaurants = () => {
     };
 
     fetchExercises();
-  });
+  }, []);
 
   return { restaurants, restaurantsAreLoading };
 };

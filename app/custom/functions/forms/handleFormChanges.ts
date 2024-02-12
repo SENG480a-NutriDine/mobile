@@ -1,10 +1,11 @@
-import { FoodForm } from "../../../constants/types/types";
+import _ from "lodash";
+import { Food } from "../../../constants/types/types";
 
 // name, description, menuUid, restaurantUid, submittedByUserUid,
 export const handleTopLevelStringChange = (
   name: string,
   value: string,
-  setFormState: React.Dispatch<React.SetStateAction<FoodForm>>
+  setFormState: React.Dispatch<React.SetStateAction<Food>>
 ) => {
   setFormState((prevFormState) => {
     return {
@@ -21,12 +22,12 @@ export const handleTopLevelStringChange = (
  * @param setFormState state setter
  */
 export const handleNutritionalDataChange = (
-  name: keyof FoodForm["nutritionalData"],
+  name: keyof Food["nutritionalData"],
   value: string | boolean,
-  setFormState: React.Dispatch<React.SetStateAction<FoodForm>>
+  setFormState: React.Dispatch<React.SetStateAction<Food>>
 ) => {
   setFormState((prevState) => {
-    const newState: FoodForm = { ...prevState };
+    const newState: Food = _.cloneDeep(prevState);
 
     if (name === "calories" && typeof value === "string") {
       // strip all non-numeric characters.

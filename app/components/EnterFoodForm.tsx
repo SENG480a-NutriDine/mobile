@@ -1,40 +1,76 @@
-import React, { useState } from "react";
-import { View, TextInput, Text, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  TextInput,
+  Text,
+  ScrollView,
+  Modal,
+  Pressable,
+} from "react-native";
 import { Button } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { colors, getStyles } from "../constants/styles/global";
-import { FoodForm } from "../constants/types/types";
-import { initializeFoodForm } from "../constants/objects/foodForm";
+import { Food } from "../constants/types/types";
+import { initializeFoodForm } from "../constants/objects/initializeFoodForm";
 import {
   handleNutritionalDataChange,
   handleTopLevelStringChange,
-} from "../custom/functions/forms/formValidation";
+} from "../custom/functions/forms/handleFormChanges";
 import FormDropdown from "./FormDropdown";
 import FormSwitch from "./FormSwitch";
 import useRestaurants from "../custom/hooks/useRestaurants";
 import useMenu from "../custom/hooks/useMenu";
+import { generateUid } from "../custom/functions/db/db";
+import {
+  safeToSendNewFoodToDB,
+  sendNewFoodToDB,
+} from "../custom/functions/forms/formSubmission";
+import _ from "lodash";
 
 export default function EnterFoodForm() {
   const { theme, styles } = getStyles();
-  // TODO: Update based on data modelling once completed
+  const [formState, setFormState] = useState<Food>(
+    _.cloneDeep(initializeFoodForm)
+  );
+  const { restaurants, restaurantsAreLoading } = useRestaurants();
+  const { menus, menusAreLoading } = useMenu(formState.restaurantUid);
   const {
     control,
     handleSubmit,
     formState: { errors },
     getValues,
     trigger,
+    reset,
   } = useForm();
-  const [formState, setFormState] = useState<FoodForm>(initializeFoodForm);
-  const { restaurants, restaurantsAreLoading } = useRestaurants();
-  const { menus, menusAreLoading } = useMenu(formState.restaurantUid);
+  const [formSubmissionError, setFormSubmissionError] = useState<string>("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [regenerateUid, setRegenerateUid] = useState(0);
 
-  const onSubmit = () => {
-    // TODO:
-    // validate all the fields
-    // generate a new food.uid
-    // submit the food to the database
-    console.log(formState);
-  };
+  useEffect(() => {
+    async function assignUid() {
+      console.log("Creating UID in EnterFoodForm.tsx...");
+      const foodUid = await generateUid();
+      handleTopLevelStringChange("uid", foodUid, setFormState);
+
+      //TODO: Get the current userUid from auth
+      // set formState.submittedByUserUid to this value
+    }
+    assignUid();
+  }, [regenerateUid]);
+
+  async function onSubmit() {
+    const isSafeToSubmit = safeToSendNewFoodToDB(formState);
+
+    if (isSafeToSubmit.isSafe) {
+      const dbWriteSuccess: { success: boolean; error: string } =
+        await sendNewFoodToDB(formState);
+      if (dbWriteSuccess.success) {
+        setModalVisible(true);
+      }
+    } else {
+      setFormSubmissionError(isSafeToSubmit.reason);
+    }
+  }
 
   const restaurantOptions = restaurantsAreLoading
     ? [{ label: "loading..", value: "" }]
@@ -49,6 +85,15 @@ export default function EnterFoodForm() {
     : menus.map((menu) => {
         return { label: menu.name, value: menu.uid };
       });
+
+  // Prepare form for next new food entry
+  function closeModalAndClearForm() {
+    setModalVisible(!modalVisible);
+    setFormState(_.cloneDeep(initializeFoodForm));
+    setFormSubmissionError("");
+    setRegenerateUid(regenerateUid + 1);
+    reset(initializeFoodForm);
+  }
 
   return (
     <ScrollView
@@ -166,6 +211,7 @@ export default function EnterFoodForm() {
             control={control}
             render={({ field }) => (
               <FormSwitch
+                startSwitchAsOn={formState.nutritionalData.isEstimate}
                 name="isEstimate"
                 field={field}
                 setFormState={setFormState}
@@ -447,6 +493,7 @@ export default function EnterFoodForm() {
             control={control}
             render={({ field }) => (
               <FormSwitch
+                startSwitchAsOn={formState.nutritionalData.isGlutenFree}
                 name="isGlutenFree"
                 field={field}
                 setFormState={setFormState}
@@ -472,6 +519,7 @@ export default function EnterFoodForm() {
             control={control}
             render={({ field }) => (
               <FormSwitch
+                startSwitchAsOn={formState.nutritionalData.isDairyFree}
                 name="isDairyFree"
                 field={field}
                 setFormState={setFormState}
@@ -497,6 +545,7 @@ export default function EnterFoodForm() {
             control={control}
             render={({ field }) => (
               <FormSwitch
+                startSwitchAsOn={formState.nutritionalData.isVegetarian}
                 name="isVegetarian"
                 field={field}
                 setFormState={setFormState}
@@ -524,6 +573,7 @@ export default function EnterFoodForm() {
               control={control}
               render={({ field }) => (
                 <FormSwitch
+                  startSwitchAsOn={formState.nutritionalData.isVegan}
                   name="isVegan"
                   field={field}
                   setFormState={setFormState}
@@ -564,6 +614,7 @@ export default function EnterFoodForm() {
             control={control}
             render={({ field }) => (
               <FormSwitch
+                startSwitchAsOn={formState.nutritionalData.hasFreshFruit}
                 name="hasFreshFruit"
                 field={field}
                 setFormState={setFormState}
@@ -589,9 +640,11 @@ export default function EnterFoodForm() {
             control={control}
             render={({ field }) => (
               <FormSwitch
+                startSwitchAsOn={formState.nutritionalData.hasFreshVegetables}
                 name="hasFreshVegetables"
                 field={field}
                 setFormState={setFormState}
+                trigger={trigger}
               />
             )}
             name="hasFreshVegetables"
@@ -600,15 +653,32 @@ export default function EnterFoodForm() {
       </View>
 
       {/* SUBMIT */}
+      {formSubmissionError !== "" && (
+        <Text style={{ paddingTop: 16, ...styles.errorText }}>
+          {formSubmissionError}
+        </Text>
+      )}
       <Button
         buttonColor={colors[theme].button.background}
         textColor={colors[theme].button.text}
         mode="contained"
-        style={styles.buttonShape}
+        style={{ marginTop: 10, marginBottom: 10, ...styles.buttonShape }}
         onPress={handleSubmit(onSubmit)}
       >
         Submit
       </Button>
+
+      {/* SUBMISSION MODAL */}
+      {modalVisible && (
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+          <Pressable onPress={closeModalAndClearForm} style={styles.modal}>
+            <Text
+              style={{ ...styles.text, fontSize: 24 }}
+            >{`"${formState.name}" successfully added!`}</Text>
+            <Text style={{ ...styles.text }}>(Tap to dismiss)</Text>
+          </Pressable>
+        </Modal>
+      )}
     </ScrollView>
   );
 }
