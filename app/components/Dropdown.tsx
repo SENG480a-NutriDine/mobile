@@ -40,7 +40,7 @@ export default function Dropdown({
     // for the controller
     field.onChange(value);
     // for the form state
-    handleTopLevelStringChange(name, value, formState, setFormState);
+    handleTopLevelStringChange(name, value, setFormState);
   }
 
   return (

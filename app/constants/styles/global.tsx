@@ -114,6 +114,7 @@ export const getStyles = () => {
         fontSize: 15,
         fontWeight: "bold",
         color: colors[theme].text,
+        paddingTop: 8,
       },
       errorText: {
         color: colors[theme].error,
@@ -121,7 +122,7 @@ export const getStyles = () => {
       dropdown: {
         backgroundColor: colors[theme].secondary,
         color: colors[theme].text,
-        minHeight: 40,
+        minHeight: 35,
         borderRadius: 10,
         borderWidth: 1,
         borderColor: colors[theme].primary,

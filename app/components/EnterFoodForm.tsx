@@ -5,7 +5,10 @@ import { Controller, useForm } from "react-hook-form";
 import { colors, getStyles } from "../constants/styles/global";
 import { FoodForm } from "../constants/types/types";
 import { initializeFoodForm } from "../constants/objects/foodForm";
-import { handleTopLevelStringChange } from "../functions/forms/formValidation";
+import {
+  handleNutritionalDataChange,
+  handleTopLevelStringChange,
+} from "../functions/forms/formValidation";
 import Dropdown from "./Dropdown";
 
 export default function EnterFoodForm() {
@@ -34,11 +37,18 @@ export default function EnterFoodForm() {
     { label: "Option 2", value: "option2" },
     { label: "Option 3", value: "option3" },
   ];
+  //TODO: Fetch all menus once restaurant is chosen, then put label=menuName, value=menuUid
+  const menuOptions = [
+    { label: "Option 1", value: "option1" },
+    { label: "Option 2", value: "option2" },
+    { label: "Option 3", value: "option3" },
+  ];
 
-  // console.log(formState.restaurantUid);
+  console.log(typeof formState.nutritionalData.calories);
+  console.log(formState.nutritionalData.calories);
   return (
     <View>
-      {/* FOOD  */}
+      {/* FOOD */}
       <Text style={styles.formLabel}>Name</Text>
       <Controller
         control={control}
@@ -49,7 +59,7 @@ export default function EnterFoodForm() {
             placeholder="Food name"
             value={formState.name}
             onChangeText={(text) => {
-              handleTopLevelStringChange("name", text, formState, setFormState);
+              handleTopLevelStringChange("name", text, setFormState);
               field.onChange(text);
             }}
           />
@@ -78,12 +88,7 @@ export default function EnterFoodForm() {
             placeholder="Food description (optional)"
             value={formState.description ?? ""}
             onChangeText={(text) => {
-              handleTopLevelStringChange(
-                "description",
-                text,
-                formState,
-                setFormState
-              );
+              handleTopLevelStringChange("description", text, setFormState);
               field.onChange(text);
             }}
           />
@@ -114,11 +119,109 @@ export default function EnterFoodForm() {
           required: "Please select a restaurant",
         }}
       />
-      {errors.restaurant && (
+      {errors.restaurantUid && (
         <Text style={styles.errorText}>
-          {String(errors.restaurant.message)}
+          {String(errors.restaurantUid.message)}
         </Text>
       )}
+
+      {/* MENU */}
+      <Text style={styles.formLabel}>{"Menu"}</Text>
+      <Controller
+        control={control}
+        render={({ field }) => (
+          <Dropdown
+            name={"menuUid"}
+            options={menuOptions}
+            formState={formState}
+            setFormState={setFormState}
+            field={field}
+          />
+        )}
+        name="menuUid"
+        rules={{
+          required: "Please select a menu",
+        }}
+      />
+      {errors.menuUid && (
+        <Text style={styles.errorText}>{String(errors.menuUid.message)}</Text>
+      )}
+
+      {/* CALORIES */}
+      <View style={{ flexDirection: "column" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: 100 }}>
+            <Text style={styles.formLabel}>Calories</Text>
+          </View>
+          <View style={{ width: 100 }}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  style={{ width: 100, ...styles.textInput }}
+                  placeholderTextColor={colors[theme].placeholderText}
+                  keyboardType="numeric"
+                  placeholder={"500"}
+                  value={
+                    formState.nutritionalData.calories > 0
+                      ? String(formState.nutritionalData.calories)
+                      : ""
+                  }
+                  onChangeText={(text) => {
+                    handleNutritionalDataChange("calories", text, setFormState);
+                    field.onChange(text);
+                  }}
+                />
+              )}
+              name="calories"
+              rules={{
+                validate: {
+                  validLength: (value: string) => {
+                    value = value ?? "";
+                    const numericalValue = Number(value.replace(/[^0-9]/g, ""));
+
+                    if (numericalValue <= 0) {
+                      return "Please enter total calories";
+                    }
+                  },
+                },
+              }}
+            />
+          </View>
+        </View>
+        {errors.calories && (
+          <Text style={styles.errorText}>
+            {String(errors.calories.message)}
+          </Text>
+        )}
+      </View>
+
+      {/* FAT */}
+
+      {/* CARBOHYDRATES */}
+
+      {/* PROTEIN */}
+
+      {/* FIBER */}
+
+      {/* ESTIMATE */}
+
+      {/* GLUTEN FREE */}
+
+      {/* DAIRY FREE */}
+
+      {/* VEGETARIAN */}
+
+      {/* VEGAN */}
+
+      {/* FRESH FRUIT */}
+
+      {/* FRESH VEGETABLES */}
 
       {/* SUBMIT */}
       <Button

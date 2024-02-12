@@ -1,6 +1,8 @@
-export const initializeFoodForm = {
-  name: "", // handleTopLevelStringChange
-  description: "", // handleTopLevelStringChange
+import { FoodForm } from "../types/types";
+
+export const initializeFoodForm: FoodForm = {
+  name: "",
+  description: "",
   nutritionalData: {
     calories: 0,
     protein: {
@@ -27,8 +29,8 @@ export const initializeFoodForm = {
     hasFreshFruit: false,
     hasFreshVegetables: false,
   },
-  menuUid: "", // handleTopLevelStringChange
-  restaurantUid: "", // handleTopLevelStringChange
-  submittedByUserUid: "", // handleTopLevelStringChange -- TODO: get from auth
+  menuUid: "",
+  restaurantUid: "",
+  submittedByUserUid: "", // TODO: get from auth
   purchaseAt: [],
 };
