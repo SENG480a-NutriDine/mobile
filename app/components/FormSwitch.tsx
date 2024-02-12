@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Switch } from "react-native-paper";
 import { FoodForm } from "../constants/types/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { handleNutritionalDataChange } from "../functions/forms/formValidation";
+import { handleNutritionalDataChange } from "../custom/functions/forms/formValidation";
 import { colors, getStyles } from "../constants/styles/global";
 
 export default function FormSwitch({

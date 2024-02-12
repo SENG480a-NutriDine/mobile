@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { colors, getStyles } from "../constants/styles/global";
 import { FoodForm } from "../constants/types/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { handleTopLevelStringChange } from "../functions/forms/formValidation";
+import { handleTopLevelStringChange } from "../custom/functions/forms/formValidation";
 
 /**
  * @brief This component is purpose built for the EnterFoodForm.tsx component.

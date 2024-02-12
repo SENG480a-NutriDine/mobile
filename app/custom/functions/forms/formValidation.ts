@@ -1,4 +1,4 @@
-import { FoodForm } from "../../constants/types/types";
+import { FoodForm } from "../../../constants/types/types";
 
 // name, description, menuUid, restaurantUid, submittedByUserUid,
 export const handleTopLevelStringChange = (

@@ -8,9 +8,11 @@ import { initializeFoodForm } from "../constants/objects/foodForm";
 import {
   handleNutritionalDataChange,
   handleTopLevelStringChange,
-} from "../functions/forms/formValidation";
+} from "../custom/functions/forms/formValidation";
 import FormDropdown from "./FormDropdown";
 import FormSwitch from "./FormSwitch";
+import useRestaurants from "../custom/hooks/useRestaurants";
+import useMenu from "../custom/hooks/useMenu";
 
 export default function EnterFoodForm() {
   const { theme, styles } = getStyles();
@@ -23,6 +25,8 @@ export default function EnterFoodForm() {
     trigger,
   } = useForm();
   const [formState, setFormState] = useState<FoodForm>(initializeFoodForm);
+  const { restaurants, restaurantsAreLoading } = useRestaurants();
+  const { menus, menusAreLoading } = useMenu(formState.restaurantUid);
 
   const onSubmit = () => {
     // TODO:
@@ -32,18 +36,19 @@ export default function EnterFoodForm() {
     console.log(formState);
   };
 
-  //TODO: Fetch all restaurants, then put label=restaurntName, value=restaurantUid
-  const restaurantOptions = [
-    { label: "Option 1", value: "option1" },
-    { label: "Option 2", value: "option2" },
-    { label: "Option 3", value: "option3" },
-  ];
-  //TODO: Fetch all menus once restaurant is chosen, then put label=menuName, value=menuUid
-  const menuOptions = [
-    { label: "Option 1", value: "option1" },
-    { label: "Option 2", value: "option2" },
-    { label: "Option 3", value: "option3" },
-  ];
+  const restaurantOptions = restaurantsAreLoading
+    ? [{ label: "loading..", value: "" }]
+    : restaurants.map((restaurant) => {
+        return { label: restaurant.name, value: restaurant.uid };
+      });
+
+  const menuOptions = menusAreLoading
+    ? [{ label: "loading..", value: "" }]
+    : formState.restaurantUid === ""
+    ? [{ label: "Please select a restaurant to see menus", value: "" }]
+    : menus.map((menu) => {
+        return { label: menu.name, value: menu.uid };
+      });
 
   return (
     <ScrollView
@@ -141,9 +146,6 @@ export default function EnterFoodForm() {
           />
         )}
         name="menuUid"
-        rules={{
-          required: "Please select a menu",
-        }}
       />
       {errors.menuUid && (
         <Text style={styles.errorText}>{String(errors.menuUid.message)}</Text>
