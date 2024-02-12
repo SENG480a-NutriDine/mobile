@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Text, ScrollView } from "react-native";
 import { Button } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { colors, getStyles } from "../constants/styles/global";
@@ -9,7 +9,8 @@ import {
   handleNutritionalDataChange,
   handleTopLevelStringChange,
 } from "../functions/forms/formValidation";
-import Dropdown from "./Dropdown";
+import FormDropdown from "./FormDropdown";
+import FormSwitch from "./FormSwitch";
 
 export default function EnterFoodForm() {
   const { theme, styles } = getStyles();
@@ -18,10 +19,10 @@ export default function EnterFoodForm() {
     control,
     handleSubmit,
     formState: { errors },
+    getValues,
+    trigger,
   } = useForm();
   const [formState, setFormState] = useState<FoodForm>(initializeFoodForm);
-  // const [restaurantDropDownVisible, setRestaurantDropDownVisible] =
-  //   useState(false);
 
   const onSubmit = () => {
     // TODO:
@@ -44,10 +45,13 @@ export default function EnterFoodForm() {
     { label: "Option 3", value: "option3" },
   ];
 
-  // console.log(typeof formState.nutritionalData.calories);
-  console.log(formState.nutritionalData);
   return (
-    <View>
+    <ScrollView
+      style={{
+        width: "100%",
+        maxWidth: 350,
+      }}
+    >
       {/* FOOD */}
       <Text style={styles.formLabel}>Name</Text>
       <Controller
@@ -106,10 +110,9 @@ export default function EnterFoodForm() {
       <Controller
         control={control}
         render={({ field }) => (
-          <Dropdown
+          <FormDropdown
             name={"restaurantUid"}
             options={restaurantOptions}
-            formState={formState}
             setFormState={setFormState}
             field={field}
           />
@@ -130,10 +133,9 @@ export default function EnterFoodForm() {
       <Controller
         control={control}
         render={({ field }) => (
-          <Dropdown
+          <FormDropdown
             name={"menuUid"}
             options={menuOptions}
-            formState={formState}
             setFormState={setFormState}
             field={field}
           />
@@ -147,6 +149,31 @@ export default function EnterFoodForm() {
         <Text style={styles.errorText}>{String(errors.menuUid.message)}</Text>
       )}
 
+      {/* ESTIMATE */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "80%" }}>
+          <Text style={styles.formLabel}>Estimated Nutritional Values?</Text>
+        </View>
+        <View style={{ width: "20%" }}>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <FormSwitch
+                name="isEstimate"
+                field={field}
+                setFormState={setFormState}
+              />
+            )}
+            name="isEstimate"
+          />
+        </View>
+      </View>
+
       {/* CALORIES */}
       <View style={{ flexDirection: "column" }}>
         <View
@@ -155,15 +182,15 @@ export default function EnterFoodForm() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.formLabel}>Calories</Text>
           </View>
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Controller
               control={control}
               render={({ field }) => (
                 <TextInput
-                  style={{ width: 100, ...styles.textInput }}
+                  style={{ width: "50%", ...styles.textInput }}
                   placeholderTextColor={colors[theme].placeholderText}
                   keyboardType="numeric"
                   placeholder={"500"}
@@ -209,15 +236,15 @@ export default function EnterFoodForm() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.formLabel}>Fat (g)</Text>
           </View>
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Controller
               control={control}
               render={({ field }) => (
                 <TextInput
-                  style={{ width: 100, ...styles.textInput }}
+                  style={{ width: "50%", ...styles.textInput }}
                   placeholderTextColor={colors[theme].placeholderText}
                   keyboardType="numeric"
                   placeholder={"5g"}
@@ -261,15 +288,15 @@ export default function EnterFoodForm() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.formLabel}>Carbohydrates (g)</Text>
           </View>
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Controller
               control={control}
               render={({ field }) => (
                 <TextInput
-                  style={{ width: 100, ...styles.textInput }}
+                  style={{ width: "50%", ...styles.textInput }}
                   placeholderTextColor={colors[theme].placeholderText}
                   keyboardType="numeric"
                   placeholder={"30g"}
@@ -319,15 +346,15 @@ export default function EnterFoodForm() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.formLabel}>Protein (g)</Text>
           </View>
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Controller
               control={control}
               render={({ field }) => (
                 <TextInput
-                  style={{ width: 100, ...styles.textInput }}
+                  style={{ width: "50%", ...styles.textInput }}
                   placeholderTextColor={colors[theme].placeholderText}
                   keyboardType="numeric"
                   placeholder={"18g"}
@@ -371,15 +398,15 @@ export default function EnterFoodForm() {
             alignItems: "center",
           }}
         >
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.formLabel}>Fiber (g)</Text>
           </View>
-          <View style={{ width: 100 }}>
+          <View style={{ width: "50%" }}>
             <Controller
               control={control}
               render={({ field }) => (
                 <TextInput
-                  style={{ width: 100, ...styles.textInput }}
+                  style={{ width: "50%", ...styles.textInput }}
                   placeholderTextColor={colors[theme].placeholderText}
                   keyboardType="numeric"
                   placeholder={"10g"}
@@ -403,19 +430,172 @@ export default function EnterFoodForm() {
         )}
       </View>
 
-      {/* ESTIMATE */}
-
       {/* GLUTEN FREE */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "80%" }}>
+          <Text style={styles.formLabel}>Gluten Free?</Text>
+        </View>
+        <View style={{ width: "20%" }}>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <FormSwitch
+                name="isGlutenFree"
+                field={field}
+                setFormState={setFormState}
+              />
+            )}
+            name="isGlutenFree"
+          />
+        </View>
+      </View>
 
       {/* DAIRY FREE */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "80%" }}>
+          <Text style={styles.formLabel}>Dairy Free?</Text>
+        </View>
+        <View style={{ width: "20%" }}>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <FormSwitch
+                name="isDairyFree"
+                field={field}
+                setFormState={setFormState}
+              />
+            )}
+            name="isDairyFree"
+          />
+        </View>
+      </View>
 
       {/* VEGETARIAN */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "80%" }}>
+          <Text style={styles.formLabel}>Vegetarian?</Text>
+        </View>
+        <View style={{ width: "20%" }}>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <FormSwitch
+                name="isVegetarian"
+                field={field}
+                setFormState={setFormState}
+                trigger={trigger}
+              />
+            )}
+            name="isVegetarian"
+          />
+        </View>
+      </View>
 
       {/* VEGAN */}
+      <View style={{ flexDirection: "column" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={styles.formLabel}>Vegan?</Text>
+          </View>
+          <View style={{ width: "20%" }}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <FormSwitch
+                  name="isVegan"
+                  field={field}
+                  setFormState={setFormState}
+                  trigger={trigger}
+                />
+              )}
+              name="isVegan"
+              rules={{
+                validate: {
+                  vegetarianSelected: (value) => {
+                    const isVegetarian = getValues("isVegetarian");
+                    if (value && !isVegetarian) {
+                      return "Please select vegetarian when vegan is selected";
+                    }
+                  },
+                },
+              }}
+            />
+          </View>
+        </View>
+        {errors.isVegan && (
+          <Text style={styles.errorText}>{String(errors.isVegan.message)}</Text>
+        )}
+      </View>
 
       {/* FRESH FRUIT */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "80%" }}>
+          <Text style={styles.formLabel}>Fresh Fruit?</Text>
+        </View>
+        <View style={{ width: "20%" }}>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <FormSwitch
+                name="hasFreshFruit"
+                field={field}
+                setFormState={setFormState}
+              />
+            )}
+            name="hasFreshFruit"
+          />
+        </View>
+      </View>
 
       {/* FRESH VEGETABLES */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "80%" }}>
+          <Text style={styles.formLabel}>Fresh Vegetables?</Text>
+        </View>
+        <View style={{ width: "20%" }}>
+          <Controller
+            control={control}
+            render={({ field }) => (
+              <FormSwitch
+                name="hasFreshVegetables"
+                field={field}
+                setFormState={setFormState}
+              />
+            )}
+            name="hasFreshVegetables"
+          />
+        </View>
+      </View>
 
       {/* SUBMIT */}
       <Button
@@ -427,6 +607,6 @@ export default function EnterFoodForm() {
       >
         Submit
       </Button>
-    </View>
+    </ScrollView>
   );
 }

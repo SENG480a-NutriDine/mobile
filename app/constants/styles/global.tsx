@@ -18,6 +18,10 @@ type Colors = {
       selected: string;
       option: string;
     };
+    switch: {
+      on: string;
+      off: string;
+    };
   };
   dark: {
     primary: string;
@@ -35,6 +39,10 @@ type Colors = {
     icon: {
       selected: string;
       option: string;
+    };
+    switch: {
+      on: string;
+      off: string;
     };
   };
 };
@@ -57,6 +65,10 @@ export const colors: Colors = {
       selected: "#8A837D",
       option: "#C9C1B9",
     },
+    switch: {
+      on: "#2A9D8F",
+      off: "#FAF7F5",
+    },
   },
   dark: {
     primary: "#121212",
@@ -74,6 +86,10 @@ export const colors: Colors = {
     icon: {
       selected: "#D6CEC7",
       option: "#8A837D",
+    },
+    switch: {
+      on: "#2A9D8F",
+      off: "#FAF7F5",
     },
   },
 };

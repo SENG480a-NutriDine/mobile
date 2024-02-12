@@ -22,13 +22,13 @@ export const handleTopLevelStringChange = (
  */
 export const handleNutritionalDataChange = (
   name: keyof FoodForm["nutritionalData"],
-  value: string,
+  value: string | boolean,
   setFormState: React.Dispatch<React.SetStateAction<FoodForm>>
 ) => {
   setFormState((prevState) => {
     const newState: FoodForm = { ...prevState };
 
-    if (name === "calories") {
+    if (name === "calories" && typeof value === "string") {
       // strip all non-numeric characters.
       const onlyNumbers = Number(value.replace(/[^0-9]/g, ""));
       newState.nutritionalData.calories = onlyNumbers;

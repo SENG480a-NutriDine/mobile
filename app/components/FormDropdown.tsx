@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RNPickerSelect, { Item } from "react-native-picker-select";
 import { View } from "react-native";
-import { getStyles } from "../constants/styles/global";
+import { colors, getStyles } from "../constants/styles/global";
 import { FoodForm } from "../constants/types/types";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { handleTopLevelStringChange } from "../functions/forms/formValidation";
@@ -13,16 +13,14 @@ import { handleTopLevelStringChange } from "../functions/forms/formValidation";
  * @param field Used by the react form controller
  * @param setFormState Used to update the form state
  */
-export default function Dropdown({
+export default function FormDropdown({
   name,
   options,
-  formState,
   field,
   setFormState,
 }: {
   name: string;
   options: { label: string; value: string }[];
-  formState: FoodForm;
   field: ControllerRenderProps<FieldValues, "restaurantUid" | "menuUid">;
   setFormState: React.Dispatch<React.SetStateAction<FoodForm>>;
 }) {
