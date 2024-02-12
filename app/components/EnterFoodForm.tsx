@@ -523,6 +523,7 @@ export default function EnterFoodForm() {
                 name="isDairyFree"
                 field={field}
                 setFormState={setFormState}
+                trigger={trigger}
               />
             )}
             name="isDairyFree"
@@ -587,6 +588,12 @@ export default function EnterFoodForm() {
                     const isVegetarian = getValues("isVegetarian");
                     if (value && !isVegetarian) {
                       return "Please select vegetarian when vegan is selected";
+                    }
+                  },
+                  dairyFreeSelected: (value) => {
+                    const isDairyFree = getValues("isDairyFree");
+                    if (value && !isDairyFree) {
+                      return "Please select dairy free when vegan is selected";
                     }
                   },
                 },

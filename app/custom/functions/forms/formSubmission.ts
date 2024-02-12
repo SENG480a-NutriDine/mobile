@@ -131,6 +131,46 @@ export function safeToSendNewFoodToDB(formState: Readonly<Food>): {
     return { isSafe: false, reason: "Fiber must be in grams." };
   }
 
+  // cannot select isVegan without isDairyFree
+  if (
+    formState.nutritionalData.isVegan &&
+    !formState.nutritionalData.isDairyFree
+  ) {
+    return {
+      isSafe: false,
+      reason: "Cannot select isVegan without isDairyFree.",
+    };
+  }
+
+  // cannot select isVegan without isVegetarian
+  if (
+    formState.nutritionalData.isVegan &&
+    !formState.nutritionalData.isVegetarian
+  ) {
+    return {
+      isSafe: false,
+      reason: "Cannot select isVegan without isVegetarian.",
+    };
+  }
+
+  // use entered calories must be within 10% of the macronutirent total
+  const computedCalories =
+    formState.nutritionalData.protein.quantity * 4 +
+    formState.nutritionalData.fat.quantity * 9 +
+    formState.nutritionalData.carbohydrates.quantity * 4;
+  const tolerance = 0.1;
+  const minCalories = Math.round(computedCalories * (1 - tolerance));
+  const maxCalories = Math.round(computedCalories * (1 + tolerance));
+  if (
+    formState.nutritionalData.calories < minCalories ||
+    formState.nutritionalData.calories > maxCalories
+  ) {
+    return {
+      isSafe: false,
+      reason: `Calories must be within 10% of the macronutrient total (calories = protein * 4 + fat * 9 + carbohydrates * 4)\nExpected: ${minCalories} - ${maxCalories} calories\nReceived: ${formState.nutritionalData.calories} calories`,
+    };
+  }
+
   /******* TODO: UNCOMMENT ONCE AUTH IS HOOKED UP *******/
   // // submittedByUserUid exists
   //   if (!formState.submittedByUserUid) {
