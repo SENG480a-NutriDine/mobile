@@ -44,8 +44,8 @@ export default function EnterFoodForm() {
     { label: "Option 3", value: "option3" },
   ];
 
-  console.log(typeof formState.nutritionalData.calories);
-  console.log(formState.nutritionalData.calories);
+  // console.log(typeof formState.nutritionalData.calories);
+  console.log(formState.nutritionalData);
   return (
     <View>
       {/* FOOD */}
@@ -202,12 +202,206 @@ export default function EnterFoodForm() {
       </View>
 
       {/* FAT */}
+      <View style={{ flexDirection: "column" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: 100 }}>
+            <Text style={styles.formLabel}>Fat (g)</Text>
+          </View>
+          <View style={{ width: 100 }}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  style={{ width: 100, ...styles.textInput }}
+                  placeholderTextColor={colors[theme].placeholderText}
+                  keyboardType="numeric"
+                  placeholder={"5g"}
+                  value={
+                    formState.nutritionalData.fat.quantity > 0
+                      ? String(formState.nutritionalData.fat.quantity)
+                      : ""
+                  }
+                  onChangeText={(text) => {
+                    handleNutritionalDataChange("fat", text, setFormState);
+                    field.onChange(text);
+                  }}
+                />
+              )}
+              name="fat"
+              rules={{
+                validate: {
+                  validLength: (value: string) => {
+                    value = value ?? "";
+                    const numericalValue = Number(value.replace(/[^0-9]/g, ""));
+
+                    if (numericalValue <= 0) {
+                      return "Please enter total fat in grams";
+                    }
+                  },
+                },
+              }}
+            />
+          </View>
+        </View>
+        {errors.fat && (
+          <Text style={styles.errorText}>{String(errors.fat.message)}</Text>
+        )}
+      </View>
 
       {/* CARBOHYDRATES */}
+      <View style={{ flexDirection: "column" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: 100 }}>
+            <Text style={styles.formLabel}>Carbohydrates (g)</Text>
+          </View>
+          <View style={{ width: 100 }}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  style={{ width: 100, ...styles.textInput }}
+                  placeholderTextColor={colors[theme].placeholderText}
+                  keyboardType="numeric"
+                  placeholder={"30g"}
+                  value={
+                    formState.nutritionalData.carbohydrates.quantity > 0
+                      ? String(formState.nutritionalData.carbohydrates.quantity)
+                      : ""
+                  }
+                  onChangeText={(text) => {
+                    handleNutritionalDataChange(
+                      "carbohydrates",
+                      text,
+                      setFormState
+                    );
+                    field.onChange(text);
+                  }}
+                />
+              )}
+              name="carbohydrates"
+              rules={{
+                validate: {
+                  validLength: (value: string) => {
+                    value = value ?? "";
+                    const numericalValue = Number(value.replace(/[^0-9]/g, ""));
+
+                    if (numericalValue <= 0) {
+                      return "Please enter total carbohydrates in grams";
+                    }
+                  },
+                },
+              }}
+            />
+          </View>
+        </View>
+        {errors.carbohydrates && (
+          <Text style={styles.errorText}>
+            {String(errors.carbohydrates.message)}
+          </Text>
+        )}
+      </View>
 
       {/* PROTEIN */}
+      <View style={{ flexDirection: "column" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: 100 }}>
+            <Text style={styles.formLabel}>Protein (g)</Text>
+          </View>
+          <View style={{ width: 100 }}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  style={{ width: 100, ...styles.textInput }}
+                  placeholderTextColor={colors[theme].placeholderText}
+                  keyboardType="numeric"
+                  placeholder={"18g"}
+                  value={
+                    formState.nutritionalData.protein.quantity > 0
+                      ? String(formState.nutritionalData.protein.quantity)
+                      : ""
+                  }
+                  onChangeText={(text) => {
+                    handleNutritionalDataChange("protein", text, setFormState);
+                    field.onChange(text);
+                  }}
+                />
+              )}
+              name="protein"
+              rules={{
+                validate: {
+                  validLength: (value: string) => {
+                    value = value ?? "";
+                    const numericalValue = Number(value.replace(/[^0-9]/g, ""));
+
+                    if (numericalValue <= 0) {
+                      return "Please enter total protein in grams";
+                    }
+                  },
+                },
+              }}
+            />
+          </View>
+        </View>
+        {errors.protein && (
+          <Text style={styles.errorText}>{String(errors.protein.message)}</Text>
+        )}
+      </View>
 
       {/* FIBER */}
+      <View style={{ flexDirection: "column" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: 100 }}>
+            <Text style={styles.formLabel}>Fiber (g)</Text>
+          </View>
+          <View style={{ width: 100 }}>
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <TextInput
+                  style={{ width: 100, ...styles.textInput }}
+                  placeholderTextColor={colors[theme].placeholderText}
+                  keyboardType="numeric"
+                  placeholder={"10g"}
+                  value={
+                    formState.nutritionalData.fiber?.quantity ?? 0 > 0
+                      ? String(formState.nutritionalData.fiber?.quantity)
+                      : ""
+                  }
+                  onChangeText={(text) => {
+                    handleNutritionalDataChange("fiber", text, setFormState);
+                    field.onChange(text);
+                  }}
+                />
+              )}
+              name="fiber"
+            />
+          </View>
+        </View>
+        {errors.fiber && (
+          <Text style={styles.errorText}>{String(errors.fiber.message)}</Text>
+        )}
+      </View>
 
       {/* ESTIMATE */}
 
