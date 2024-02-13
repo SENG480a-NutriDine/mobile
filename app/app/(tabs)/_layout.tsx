@@ -12,7 +12,7 @@ export default () => {
         tabBarActiveTintColor: colors[theme].icon.selected,
         tabBarInactiveTintColor: colors[theme].icon.option,
         tabBarStyle: {
-          height: 40,
+          height: 80,
           backgroundColor: colors[theme].primary,
           //   borderWidth: 2,
           //   borderTopLeftRadius: 2,
