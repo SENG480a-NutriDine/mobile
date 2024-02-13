@@ -8,13 +8,13 @@ export default function DataSubmission() {
   const { styles } = getStyles();
 
   const windowHeight = Dimensions.get("window").height;
-  const calculatedHeight = windowHeight - (48 + 32);
+  const calculatedHeight = windowHeight - (48 + 48);
   return (
     <SafeAreaView
       style={{
         width: "100%",
         paddingTop: 48,
-        paddingBottom: 32,
+        paddingBottom: 48,
         height: calculatedHeight,
         ...styles.container,
       }}
