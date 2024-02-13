@@ -171,6 +171,32 @@ export function safeToSendNewFoodToDB(formState: Readonly<Food>): {
     };
   }
 
+  // if purchaseAt.url exists, make sure displayName exists
+  if (formState.purchaseAt) {
+    for (const entry of formState.purchaseAt) {
+      if (entry.url && !entry.displayName) {
+        return {
+          isSafe: false,
+          reason:
+            "You provided a purchase URL, please also include a display name.",
+        };
+      }
+    }
+  }
+
+  // if purchaseAt.displayName exists, make sure url exists
+  if (formState.purchaseAt) {
+    for (const entry of formState.purchaseAt) {
+      if (entry.displayName && !entry.url) {
+        return {
+          isSafe: false,
+          reason:
+            "You provided a display name, please also include a purchase URL.",
+        };
+      }
+    }
+  }
+
   /******* TODO: UNCOMMENT ONCE AUTH IS HOOKED UP *******/
   // // submittedByUserUid exists
   //   if (!formState.submittedByUserUid) {
@@ -185,10 +211,8 @@ export function safeToSendNewFoodToDB(formState: Readonly<Food>): {
 }
 
 /**
- * @note Function will update description & fiber object to null if description
- * is an empty string or fiber.quantity is 0.This is because the form requires a
- * non-null value for fiber and description, but the DB should not mislead users
- * by showing 0g fiber or "" description.
+ * @note Function will update description, fiber and purchaseAt to null
+ * before writing to DB if the form has empty data.
  */
 export async function sendNewFoodToDB(formState: Food): Promise<{
   success: boolean;
@@ -197,6 +221,7 @@ export async function sendNewFoodToDB(formState: Food): Promise<{
   // Do not change the formState, must make a new object
   let dbReadyFood = _.cloneDeep(formState);
 
+  // If fiber is 0, set it to null
   if (
     dbReadyFood.nutritionalData.fiber !== null &&
     dbReadyFood.nutritionalData.fiber.quantity === 0
@@ -204,8 +229,18 @@ export async function sendNewFoodToDB(formState: Food): Promise<{
     dbReadyFood.nutritionalData.fiber = null;
   }
 
+  // If description is "", set it to null
   if (dbReadyFood.description === "") {
     dbReadyFood.description = null;
+  }
+
+  // If purchaseAt.url and purchaseAt.displayName are "", set purchaseAt to null
+  if (
+    dbReadyFood.purchaseAt &&
+    dbReadyFood.purchaseAt[0].url === "" &&
+    dbReadyFood.purchaseAt[0].displayName === ""
+  ) {
+    dbReadyFood.purchaseAt = null;
   }
 
   try {

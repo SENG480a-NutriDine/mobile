@@ -15,6 +15,24 @@ export const handleTopLevelStringChange = (
   });
 };
 
+// TODO: This is the dummy implementation: Will need to update to
+// allow any number of purchaseAt items (it is an array).
+export function handlePurchaseAtChange(
+  url: string | null,
+  displayName: string | null,
+  setFormState: React.Dispatch<React.SetStateAction<Food>>
+) {
+  setFormState((prevFormState) => {
+    const setUrl = url ?? prevFormState.purchaseAt?.[0].url ?? "";
+    const setDisplayName =
+      displayName ?? prevFormState.purchaseAt?.[0].displayName ?? "";
+    return {
+      ...prevFormState,
+      purchaseAt: [{ url: setUrl, displayName: setDisplayName }],
+    };
+  });
+}
+
 /**
  * @brief Updates state for nutritional data items. Assumes all units are grams.
  * @param name calories, protein, carbohydrates, fiber, isGlutenFree, isDairyFree, isVegetarian, isVegan, isEstimate, hasFreshFruit or hasFreshVegetables

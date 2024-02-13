@@ -14,6 +14,7 @@ import { Food } from "../constants/types/types";
 import { initializeFoodForm } from "../constants/objects/initializeFoodForm";
 import {
   handleNutritionalDataChange,
+  handlePurchaseAtChange,
   handleTopLevelStringChange,
 } from "../custom/functions/forms/handleFormChanges";
 import FormDropdown from "./FormDropdown";
@@ -665,6 +666,48 @@ export default function EnterFoodForm() {
           {formSubmissionError}
         </Text>
       )}
+
+      {/* PURCHASE AT */}
+      <Text style={{ marginTop: 10, ...styles.formLabel }}>Purchase At</Text>
+      <Controller
+        control={control}
+        render={({ field }) => (
+          <View>
+            <TextInput
+              style={styles.textInput}
+              placeholderTextColor={colors[theme].placeholderText}
+              placeholder="Restaurant Name"
+              value={formState.purchaseAt?.[0]?.displayName ?? ""}
+              onChangeText={(text) => {
+                handlePurchaseAtChange(null, text, setFormState);
+                field.onChange(text);
+              }}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholderTextColor={colors[theme].placeholderText}
+              placeholder="www.restaurant/order-online.com"
+              value={formState.purchaseAt?.[0]?.url ?? ""}
+              onChangeText={(text) => {
+                handlePurchaseAtChange(text, null, setFormState);
+                field.onChange(text);
+              }}
+            />
+          </View>
+        )}
+        name="purchaseAt"
+        // rules={{
+        //   required: "Please enter a food name",
+        //   minLength: {
+        //     value: 1,
+        //     message: "Please enter a food name,",
+        //   },
+        // }}
+      />
+      {errors.name && (
+        <Text style={styles.errorText}>{String(errors.name.message)}</Text>
+      )}
+
       <Button
         buttonColor={colors[theme].button.background}
         textColor={colors[theme].button.text}

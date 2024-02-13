@@ -33,7 +33,7 @@ export const initializeFoodForm: Readonly<Food> = {
   menuUid: "",
   restaurantUid: "",
   submittedByUserUid: "",
-  purchaseAt: [],
+  purchaseAt: [{ url: "", displayName: "" }],
   ratingCounts: {
     1: 0,
     2: 0,
