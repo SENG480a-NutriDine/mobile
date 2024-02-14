@@ -8,13 +8,13 @@ import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB9KciPJF6V4CB_yi37AXy-I4RognItqBQ",
-  authDomain: "nutridine.firebaseapp.com",
-  projectId: "nutridine",
-  storageBucket: "nutridine.appspot.com",
-  messagingSenderId: "188208814441",
-  appId: "1:188208814441:web:c38d239cd4d32dcaad05f8",
-  measurementId: "G-8Q4FKYK8WB",
+  apiKey: process.env.EXPO_PUBLIC_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_MEASURMENT_ID,
 };
 
 export const FIREBASE_APP = initializeApp(firebaseConfig);
