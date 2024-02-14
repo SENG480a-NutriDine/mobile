@@ -1,23 +1,25 @@
 import React from "react";
 import EnterFoodForm from "../../components/EnterFoodForm";
-import { View } from "react-native";
-import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native";
 import { getStyles } from "../../constants/styles/global";
+import { Dimensions } from "react-native";
 
 export default function DataSubmission() {
   const { styles } = getStyles();
+
+  const windowHeight = Dimensions.get("window").height;
+  const calculatedHeight = windowHeight - (48 + 48);
   return (
-    <View style={{ width: "100%", height: "100%", ...styles.container }}>
+    <SafeAreaView
+      style={{
+        width: "100%",
+        paddingTop: 48,
+        paddingBottom: 48,
+        height: calculatedHeight,
+        ...styles.container,
+      }}
+    >
       <EnterFoodForm />
-    </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  dataSubmissionContainer: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    padding: 20,
-  },
-});
