@@ -7,7 +7,9 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { getStyles, colors } from "../../constants/styles/global";
-import * as AuthService from '../../services/AuthService/AuthService'
+import * as AuthService from "../../services/AuthService/AuthService";
+import HomeScreen from "./HomeScreen";
+import LoginScreen from "./LoginScreen";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -59,36 +61,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Button
-        style={styles.buttonShape}
-        buttonColor={colors[theme].button.background}
-        textColor={colors[theme].button.text}
-        mode="contained"
-        onPress={AuthService.signIn}
-      >
-        <Text>sign in</Text>
-      </Button>
-
-      <Button
-        style={styles.buttonShape}
-        buttonColor={colors[theme].button.background}
-        textColor={colors[theme].button.text}
-        mode="contained"
-        onPress={AuthService.signOut}
-      >
-        <Text>sign out</Text>
-      </Button>
-
-      <Button
-        style={styles.buttonShape}
-        buttonColor={colors[theme].button.background}
-        textColor={colors[theme].button.text}
-        mode="contained"
-        onPress={AuthService.getCurrentUser}
-      >
-        <Text>get user</Text>
-      </Button>
-      
+      <LoginScreen />
       <StatusBar style="auto" />
     </View>
   );
