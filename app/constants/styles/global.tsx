@@ -20,6 +20,10 @@ type Colors = {
       selected: string;
       option: string;
     };
+    switch: {
+      on: string;
+      off: string;
+    };
   };
   dark: {
     primary: string;
@@ -39,6 +43,10 @@ type Colors = {
     icon: {
       selected: string;
       option: string;
+    };
+    switch: {
+      on: string;
+      off: string;
     };
   };
 };
@@ -63,6 +71,10 @@ export const colors: Colors = {
       selected: "#8A837D",
       option: "#C9C1B9",
     },
+    switch: {
+      on: "#2A9D8F",
+      off: "#FAF7F5",
+    },
   },
   dark: {
     primary: "#121212",
@@ -82,6 +94,10 @@ export const colors: Colors = {
     icon: {
       selected: "#D6CEC7",
       option: "#8A837D",
+    },
+    switch: {
+      on: "#2A9D8F",
+      off: "#FAF7F5",
     },
   },
 };
@@ -122,9 +138,29 @@ export const getStyles = () => {
         fontSize: 15,
         fontWeight: "bold",
         color: colors[theme].text,
+        paddingTop: 8,
       },
       errorText: {
         color: colors[theme].error,
+      },
+      dropdown: {
+        backgroundColor: colors[theme].secondary,
+        color: colors[theme].text,
+        minHeight: 35,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: colors[theme].primary,
+      },
+      modal: {
+        backgroundColor: colors[theme].secondary,
+        color: colors[theme].text,
+        width: "100%",
+        height: "100%",
+        borderRadius: 20,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        alignItems: "center",
       },
     }),
   };

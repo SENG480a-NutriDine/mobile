@@ -7,6 +7,7 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { getStyles, colors } from "../../constants/styles/global";
+import * as AuthService from '../../services/AuthService/AuthService'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -63,18 +64,31 @@ export default function App() {
         buttonColor={colors[theme].button.background}
         textColor={colors[theme].button.text}
         mode="contained"
-        onPress={testWriteToDB}
+        onPress={AuthService.signIn}
       >
-        <Text>Test write to DB</Text>
+        <Text>sign in</Text>
       </Button>
-      {testState.length > 0 &&
-        testState.map(
-          (doc: { id: react.Key | null | undefined; title: any }) => (
-            <View key={doc.id}>
-              <Text style={styles.text}>{`Title: ${doc.title}`}</Text>
-            </View>
-          )
-        )}
+
+      <Button
+        style={styles.buttonShape}
+        buttonColor={colors[theme].button.background}
+        textColor={colors[theme].button.text}
+        mode="contained"
+        onPress={AuthService.signOut}
+      >
+        <Text>sign out</Text>
+      </Button>
+
+      <Button
+        style={styles.buttonShape}
+        buttonColor={colors[theme].button.background}
+        textColor={colors[theme].button.text}
+        mode="contained"
+        onPress={AuthService.getCurrentUser}
+      >
+        <Text>get user</Text>
+      </Button>
+      
       <StatusBar style="auto" />
     </View>
   );
