@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     },
     category: {
         padding: 40,
-        backgroundColor: '#fff',
         borderRadius: 100,
     },
     categoryText: {
