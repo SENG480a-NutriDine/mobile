@@ -17,7 +17,7 @@ export default () => {
           opacity: 0.97,
           // borderTopLeftRadius: 100,
           // borderTopRightRadius: 100,
-          position: "absolute",
+          // position: "absolute",
           //   borderColor: colors[theme].secondary,
         },
         tabBarLabelStyle: {
