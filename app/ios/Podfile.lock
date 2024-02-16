@@ -16,13 +16,80 @@ PODS:
   - EXJSONUtils (0.12.3)
   - EXManifests (0.13.2):
     - ExpoModulesCore
-  - Expo (50.0.4):
+  - Expo (50.0.6):
     - ExpoModulesCore
+  - expo-dev-client (3.3.8):
+    - EXManifests
+    - expo-dev-launcher
+    - expo-dev-menu
+    - expo-dev-menu-interface
+    - EXUpdatesInterface
+  - expo-dev-launcher (3.6.6):
+    - EXManifests
+    - expo-dev-launcher/Main (= 3.6.6)
+    - expo-dev-menu
+    - expo-dev-menu-interface
+    - ExpoModulesCore
+    - EXUpdatesInterface
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+    - React-RCTAppDelegate
+  - expo-dev-launcher/Main (3.6.6):
+    - EXManifests
+    - expo-dev-launcher/Unsafe
+    - expo-dev-menu
+    - expo-dev-menu-interface
+    - ExpoModulesCore
+    - EXUpdatesInterface
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+    - React-RCTAppDelegate
+  - expo-dev-launcher/Unsafe (3.6.6):
+    - EXManifests
+    - expo-dev-menu
+    - expo-dev-menu-interface
+    - ExpoModulesCore
+    - EXUpdatesInterface
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+    - React-RCTAppDelegate
+  - expo-dev-menu (4.5.5):
+    - expo-dev-menu/Main (= 4.5.5)
+    - expo-dev-menu/ReactNativeCompatibles (= 4.5.5)
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+  - expo-dev-menu-interface (1.7.2)
+  - expo-dev-menu/Main (4.5.5):
+    - EXManifests
+    - expo-dev-menu-interface
+    - expo-dev-menu/Vendored
+    - ExpoModulesCore
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+  - expo-dev-menu/ReactNativeCompatibles (4.5.5):
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+  - expo-dev-menu/SafeAreaView (4.5.5):
+    - ExpoModulesCore
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
+  - expo-dev-menu/Vendored (4.5.5):
+    - expo-dev-menu/SafeAreaView
+    - glog
+    - RCT-Folly (= 2022.05.16.00)
+    - React-Core
   - ExpoAdapterGoogleSignIn (11.0.0):
     - ExpoModulesCore
     - GoogleSignIn (~> 7.0)
     - React-Core
-  - ExpoFileSystem (16.0.5):
+  - ExpoFileSystem (16.0.6):
     - ExpoModulesCore
   - ExpoHead (3.4.7):
     - ExpoModulesCore
@@ -1152,6 +1219,8 @@ PODS:
     - React-logger (= 0.73.2)
     - React-perflogger (= 0.73.2)
   - RecaptchaInterop (100.0.0)
+  - RNCPicker (2.6.1):
+    - React-Core
   - RNFBApp (18.8.0):
     - Firebase/CoreOnly (= 10.20.0)
     - React-Core
@@ -1181,6 +1250,10 @@ DEPENDENCIES:
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
   - Expo (from `../node_modules/expo`)
+  - expo-dev-client (from `../node_modules/expo-dev-client/ios`)
+  - expo-dev-launcher (from `../node_modules/expo-dev-launcher`)
+  - expo-dev-menu (from `../node_modules/expo-dev-menu`)
+  - expo-dev-menu-interface (from `../node_modules/expo-dev-menu-interface/ios`)
   - "ExpoAdapterGoogleSignIn (from `../node_modules/@react-native-google-signin/google-signin/expo/ios`)"
   - ExpoFileSystem (from `../node_modules/expo-file-system/ios`)
   - ExpoHead (from `../node_modules/expo-router/ios`)
@@ -1239,6 +1312,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
@@ -1282,6 +1356,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-manifests/ios"
   Expo:
     :path: "../node_modules/expo"
+  expo-dev-client:
+    :path: "../node_modules/expo-dev-client/ios"
+  expo-dev-launcher:
+    :path: "../node_modules/expo-dev-launcher"
+  expo-dev-menu:
+    :path: "../node_modules/expo-dev-menu"
+  expo-dev-menu-interface:
+    :path: "../node_modules/expo-dev-menu-interface/ios"
   ExpoAdapterGoogleSignIn:
     :path: "../node_modules/@react-native-google-signin/google-signin/expo/ios"
   ExpoFileSystem:
@@ -1393,6 +1475,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCPicker:
+    :path: "../node_modules/@react-native-picker/picker"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBAuth:
@@ -1413,9 +1497,13 @@ SPEC CHECKSUMS:
   EXFont: 21b9c760abd593ce8f0d5386b558ced76018506f
   EXJSONUtils: 5c42959e87be238b045ef37cc5268b16a6c0ad4a
   EXManifests: 5e8c29f36c716af768a4ea47ec05e1b89ab93091
-  Expo: 1e3bcf9dd99de57a636127057f6b488f0609681a
+  Expo: fb745b3074989670b6641f9f20463e8ee56a69ca
+  expo-dev-client: 025dce84f48b04c60c3891547732f001f6aad777
+  expo-dev-launcher: 4e83baafc5b7090c0da29acbceb6007e0a7ed3d8
+  expo-dev-menu: 1b221587615ce11b37a64da5520e9a639496571b
+  expo-dev-menu-interface: 7ba029c9d1a82ac22b9b584c00514860b060553e
   ExpoAdapterGoogleSignIn: ee39be2723cc5a39b3c01cb56d779831c975e17f
-  ExpoFileSystem: 04795dd4d47e76eaf12e38c92091f77d794f9e7f
+  ExpoFileSystem: a9273932e69a9a1e1a8d01b6ba895bb8294bbea2
   ExpoHead: 5aa4ef0a18a83f323e21cf83ff29b94d3c53e050
   ExpoKeepAwake: 0f5cad99603a3268e50af9a6eb8b76d0d9ac956c
   ExpoModulesCore: 2346e83abf90c2b2c16a54c3fc4a1169ae12816c
@@ -1483,6 +1571,7 @@ SPEC CHECKSUMS:
   React-utils: 414787344613940abeb72cc95fba338e300ba3ac
   ReactCommon: d4860bcbe85d89bb261ba28948f027325bb577dc
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
+  RNCPicker: b18aaf30df596e9b1738e7c1f9ee55402a229dca
   RNFBApp: 5810d39f89d38272f29d9908cb19ef641922c081
   RNFBAuth: 22be3e62ac7efaeff8edddd4de93d288382ecdc7
   RNGoogleSignin: fc408799f1990a12497a32f64280c0fe353ffcc1
