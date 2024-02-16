@@ -58,7 +58,7 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <Button
         style={styles.buttonShape}
         buttonColor={colors[theme].button.background}
@@ -88,7 +88,7 @@ export default function App() {
       >
         <Text>get user</Text>
       </Button>
-      
+
       <StatusBar style="auto" />
     </View>
   );

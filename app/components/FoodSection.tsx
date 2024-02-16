@@ -1,18 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { colors, getStyles } from "../constants/styles/global";
-
-// Will Change based off data model
-interface FoodItem {
-    id: number; // Unique identifier for each food item
-    name: string; // Name of the food item
-    description?: string; // Description of the food item (optional)
-    price: number; // Price of the food item
-}
+import { Food } from "../constants/types/types";
 
 interface FoodSectionProps {
     restaurantName: string;
-    foodItems: FoodItem[];
+    foodItems: Food[];
 }
 
 const FoodSection: React.FC<FoodSectionProps> = ({ restaurantName, foodItems }) => {
@@ -28,7 +21,7 @@ const FoodSection: React.FC<FoodSectionProps> = ({ restaurantName, foodItems }) 
             <ScrollView horizontal style={styles.items} showsHorizontalScrollIndicator={false}>
                 {foodItems.map(item => (
                     <View
-                        key={item.id}
+                        key={item.uid}
                         style={[styles.item, { backgroundColor: colors[theme].secondary }]}
                     >
                         <Text
@@ -55,14 +48,13 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 25,
-        marginBottom: 10, // Increased bottom margin for more space above the items
+        marginBottom: 10,
     },
     items: {
     },
     item: {
         width: 178,
         height: 150,
-        // backgroundColor: "white",
         borderRadius: 20,
         marginRight: 20,
         padding: 15,
@@ -73,7 +65,6 @@ const styles = StyleSheet.create({
     },
     itemDescription: {
         fontSize: 15,
-        color: "#666",
     },
 });
 

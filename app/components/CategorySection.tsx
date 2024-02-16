@@ -9,18 +9,19 @@ const CategorySection = () => {
     const categories = [
         "High-Protein",
         "Low-Calorie",
-        "Healthy",
         "Vegan",
         "Vegitarian",
-        "Halal",
+        "Gluten-Free",
+        "Dairy-Free",
+        "Fresh-Veggies",
+        "Fresh-Fruit",
     ];
 
     return (
         <ScrollView horizontal style={styles.root} showsHorizontalScrollIndicator={false}>
             {categories.map((category, index) => (
-                <View style={styles.item}>
+                <View key={index} style={styles.item}>
                     <View
-                        key={index}
                         style={[styles.category, { backgroundColor: colors[theme].secondary }]}
                     />
                     <Text
