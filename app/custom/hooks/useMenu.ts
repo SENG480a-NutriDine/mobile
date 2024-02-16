@@ -13,7 +13,7 @@ const useMenu = (restaurantUid: string) => {
   const [menusAreLoading, setMenusAreLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchExercises = async () => {
+    const fetchMenus = async () => {
       console.log("useMenu() is fetching...");
       try {
         const db = getFirestore();
@@ -37,7 +37,7 @@ const useMenu = (restaurantUid: string) => {
       }
     };
 
-    fetchExercises();
+    fetchMenus();
   }, [restaurantUid]);
 
   return { menus, menusAreLoading };
