@@ -88,7 +88,7 @@ export default function App() {
       >
         <Text>get user</Text>
       </Button>
-      
+
       <StatusBar style="auto" />
     </View>
   );

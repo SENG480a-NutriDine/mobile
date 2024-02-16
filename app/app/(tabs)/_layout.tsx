@@ -12,11 +12,12 @@ export default () => {
         tabBarActiveTintColor: colors[theme].icon.selected,
         tabBarInactiveTintColor: colors[theme].icon.option,
         tabBarStyle: {
-          height: 80,
+          height: 90,
           backgroundColor: colors[theme].primary,
-          //   borderWidth: 2,
-          //   borderTopLeftRadius: 2,
-          //   borderTopRightRadius: 2,
+          opacity: 0.97,
+          // borderTopLeftRadius: 100,
+          // borderTopRightRadius: 100,
+          // position: "absolute",
           //   borderColor: colors[theme].secondary,
         },
         tabBarLabelStyle: {
@@ -25,7 +26,7 @@ export default () => {
       }}
     >
       <Tabs.Screen
-        name="App"
+        name="HomePage"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
