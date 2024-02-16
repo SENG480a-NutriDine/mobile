@@ -28,14 +28,13 @@ export default () => {
       <Tabs.Screen
         name="HomeScreen"
         options={{
-          href: "/home",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="home" size={size} color={color} />
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="LoginScreen"
         options={{
           headerShown: false,
@@ -43,13 +42,22 @@ export default () => {
             <FontAwesome name="user" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="DataSubmission"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Entypo name="add-to-list" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="userInfo"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
           ),
         }}
       />

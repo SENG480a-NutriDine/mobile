@@ -2,13 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { router } from "expo-router";
 import { Button } from "react-native-paper";
 import { Text, View } from "react-native";
-import { FIREBASE_DB } from "../../firebaseConfig";
+import { FIREBASE_DB } from "../firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import react, { useEffect, useState, useCallback } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { getStyles, colors } from "../../constants/styles/global";
-import * as AuthService from "../../services/AuthService/AuthService";
-import HomeScreen from "./HomeScreen";
+import { getStyles, colors } from "../constants/styles/global";
+import * as AuthService from "../services/AuthService/AuthService";
+import HomeScreen from "./(tabs)/HomeScreen";
 import LoginScreen from "./LoginScreen";
 
 SplashScreen.preventAutoHideAsync();

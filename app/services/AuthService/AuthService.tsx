@@ -28,7 +28,10 @@ export const signIn = async () => {
 
     await checkAndAddUser(signInResult.user);
 
-    return signInResult.user;
+    if (signInResult.user) {
+      return true;
+    }
+    return false;
   } catch (error: any) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       // Handle sign-in cancelled case
@@ -40,8 +43,6 @@ export const signIn = async () => {
       // Handle other errors
     }
     throw error; // Rethrow the error if you need to handle it in the calling component
-  } finally {
-    return <Redirect href="/home" />;
   }
 };
 
