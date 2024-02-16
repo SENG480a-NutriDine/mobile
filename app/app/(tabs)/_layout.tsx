@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, getStyles } from "../../constants/styles/global";
 import { Entypo } from "@expo/vector-icons";
+import HomeScreen from "./HomeScreen";
 
 export default () => {
   const { theme } = getStyles();
@@ -26,7 +27,7 @@ export default () => {
       }}
     >
       <Tabs.Screen
-        name="HomePage"
+        name="HomeScreen"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -34,12 +35,30 @@ export default () => {
           ),
         }}
       />
+      {/* <Tabs.Screen
+        name="LoginScreen"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
+          ),
+        }}
+      /> */}
       <Tabs.Screen
         name="DataSubmission"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Entypo name="add-to-list" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="userInfo"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
           ),
         }}
       />
