@@ -58,7 +58,7 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <Button
         style={styles.buttonShape}
         buttonColor={colors[theme].button.background}
