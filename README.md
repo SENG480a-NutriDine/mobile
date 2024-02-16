@@ -2,6 +2,12 @@
 
 React Native Application that interacts with Firebase BaaS.
 
+
+## Getting Started for Teachers
+
+Use this [link](https://github.com/SENG480a-NutriDine/mobile/wiki/Instructions-for-Teachers) and follow the instructions, please.
+
+
 ## Getting Started for Devs
 
 This is a React-Native with Expo App that has a firebase API connection setup. For many classic DB tasks, log into the Firebase console (you will first need to be granted access).
