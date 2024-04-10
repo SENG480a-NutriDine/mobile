@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "188208814441-eb1rg4h7l0v0qbmjqatpgamvv7hv1e0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.mobile",
+            "certificate_hash": "ddfdc4f2c3d9d81a392102deafcfe7a5fa1e3381"
+          }
+        },
+        {
           "client_id": "188208814441-o6lot80rpvs7a9rotedtoq6pdb713tk1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -30,7 +38,7 @@
           }
         },
         {
-          "client_id": "188208814441-8u30auacid9g4d5pfjufaotqrgp53q1r.apps.googleusercontent.com",
+          "client_id": "188208814441-0pe3a9fev94sef2jfbpn7kalq153kiol.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

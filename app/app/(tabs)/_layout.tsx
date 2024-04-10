@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { colors, getStyles } from "../../constants/styles/global";
 import { Entypo } from "@expo/vector-icons";
+import HomeScreen from "./HomeScreen";
 
 export default () => {
   const { theme } = getStyles();
@@ -12,11 +13,12 @@ export default () => {
         tabBarActiveTintColor: colors[theme].icon.selected,
         tabBarInactiveTintColor: colors[theme].icon.option,
         tabBarStyle: {
-          height: 80,
+          height: 90,
           backgroundColor: colors[theme].primary,
-          //   borderWidth: 2,
-          //   borderTopLeftRadius: 2,
-          //   borderTopRightRadius: 2,
+          opacity: 0.97,
+          // borderTopLeftRadius: 100,
+          // borderTopRightRadius: 100,
+          // position: "absolute",
           //   borderColor: colors[theme].secondary,
         },
         tabBarLabelStyle: {
@@ -25,7 +27,7 @@ export default () => {
       }}
     >
       <Tabs.Screen
-        name="App"
+        name="HomeScreen"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -33,12 +35,30 @@ export default () => {
           ),
         }}
       />
+      {/* <Tabs.Screen
+        name="LoginScreen"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
+          ),
+        }}
+      /> */}
       <Tabs.Screen
         name="DataSubmission"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Entypo name="add-to-list" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="userInfo"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
           ),
         }}
       />
